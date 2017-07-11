@@ -91,6 +91,7 @@
     <Compile Include="Models\stock.cs" />
     <Compile Include="Models\type_product.cs" />
     <Compile Include="Models\users.cs" />
+    <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>

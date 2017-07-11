@@ -24,12 +24,12 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBox x:Name="txtUsuario" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese un usuario" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Margin="108,17,109,0" BorderBrush="Black"/>
+            <TextBox x:Name="txtUsuario" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese un usuario" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Margin="108,17,109,0" BorderBrush="Black"/>
             <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese una contraseña" Margin="108,67,109,0" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Button x:Name="btnIngresar" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="110,137,107,-34" VerticalAlignment="Top" Width="175" BorderBrush="Black" Click="btnIngresar_Click"/>
+            <Button x:Name="btnIngresar" Command="{Binding Path=RefreshCommand}" CommandParameter="{Binding ElementName=txtPassword}" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="110,137,107,-34" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
         </Grid>
 
 

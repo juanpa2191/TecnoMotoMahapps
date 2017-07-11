@@ -23,12 +23,15 @@ namespace TecnoMoto
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public UserViewModel MyContext { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            MyContext = new UserViewModel();
+            this.DataContext = MyContext;
         }
 
-        private async void btnIngresar_Click(object sender, RoutedEventArgs e)
+        /*private async void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
             UserViewModel userVM = new UserViewModel();
 
@@ -44,6 +47,6 @@ namespace TecnoMoto
             }
             else
                 await this.ShowMessageAsync("Error !", "Verifica tus datos");
-        }
+        }*/
     }
 }
