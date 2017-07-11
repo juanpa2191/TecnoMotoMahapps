@@ -7,17 +7,42 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Login" Height="350" Width="525">
+        Title="Login" Height="350" Width="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <!--<RowDefinition Height="*"></RowDefinition>-->
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Path Grid.Row="0">
+        <Grid Grid.Row="0">
+            <Rectangle Margin="0, 0, 0, 0" Width="100" Height="100">
+                <Rectangle.Fill>
+                    <VisualBrush Visual="{StaticResource appbar_user}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBox x:Name="txtUsuario" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese un usuario" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Margin="108,17,109,0" BorderBrush="Black"/>
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese una contraseña" Margin="108,67,109,0" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Button x:Name="btnIngresar" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="110,137,107,-34" VerticalAlignment="Top" Width="175" BorderBrush="Black" Click="btnIngresar_Click"/>
             
-        </Path>
+        </Grid>
+
+
+        <!--<VisualBrush Visual="{StaticResource appbar_cupcake}" />-->
+        <!--<Path Grid.Row="0"  Stroke="#FF3399FF" StrokeThickness="2" Data="{Binding User}">
+            <Path.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFD4D4D4" Offset="0"/>
+                    <GradientStop Color="#FFDADADA" Offset="1"/>
+                </RadialGradientBrush>
+            </Path.Fill>
+        </Path>-->
         <!--<Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="120,25,0,0" VerticalAlignment="Top" Width="100" Stretch="Fill" Source="Img/user_man_kid.png"/>-->
         
 

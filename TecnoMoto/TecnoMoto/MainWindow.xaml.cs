@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,19 @@ namespace TecnoMoto
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void btnIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtUsuario.Text == "admin" && txtPassword.Password == "123")
+            {
+                await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
+                Views.HomeWindow _ver = new Views.HomeWindow();
+                this.Close();
+                _ver.ShowDialog();
+            }
+            else
+                await this.ShowMessageAsync("Error !", "Verifica tus datos");
         }
     }
 }
