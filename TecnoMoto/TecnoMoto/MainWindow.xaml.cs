@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TecnoMoto.ViewModels;
 
 namespace TecnoMoto
 {
@@ -29,6 +30,11 @@ namespace TecnoMoto
 
         private async void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
+            UserViewModel userVM = new UserViewModel();
+
+            userVM.isExist();
+
+
             if (txtUsuario.Text == "admin" && txtPassword.Password == "123")
             {
                 await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);

@@ -82,6 +82,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\bill.cs" />
+    <Compile Include="Models\client.cs" />
+    <Compile Include="Models\Db_TecnoMotos.cs" />
+    <Compile Include="Models\detail_bill.cs" />
+    <Compile Include="Models\product.cs" />
+    <Compile Include="Models\provider.cs" />
+    <Compile Include="Models\stock.cs" />
+    <Compile Include="Models\type_product.cs" />
+    <Compile Include="Models\users.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -149,9 +159,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
