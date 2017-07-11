@@ -30,7 +30,6 @@
 
         <Grid Grid.Row="1">
             <Button x:Name="btnIngresar" Content="Iniciar Sesion" HorizontalAlignment="Center" Margin="110,137,107,-34" VerticalAlignment="Top" Width="175" BorderBrush="Black" Click="btnIngresar_Click"/>
-            
         </Grid>
 
 
