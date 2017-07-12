@@ -7,8 +7,80 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Menu" Height="300" Width="300">
+        Title="Menu" Height="auto" Width="1138">
+
+    <Window.Resources>
+        <Style x:Key="LargeTileStyle" TargetType="Controls:Tile">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="125" />
+            <Setter Property="TitleFontSize" Value="10" />
+        </Style>
+
+        <Style x:Key="SmallTileStyle" TargetType="Controls:Tile">
+            <Setter Property="Width" Value="147" />
+            <Setter Property="Height" Value="125" />
+            <Setter Property="TitleFontSize" Value="10" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="87*"/>
+            <ColumnDefinition Width="430*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="259*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="1"
+                   VerticalAlignment="Center"
+                   Text="Start"
+                   FontWeight="Light"
+                   Foreground="White"
+                   FontSize="30"
+                   FontFamily="Segoe UI" />
+
+        <WrapPanel Grid.Row="1" Grid.Column="1" Width="940" Height="382" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Controls:Tile Title="Mail" Style="{StaticResource LargeTileStyle}" Content="ImageHere" Background="Teal" Margin="3"/>
+            <Controls:Tile Title="Desktop" Style="{StaticResource LargeTileStyle}"  Margin="3">
+                <Controls:Tile.Background>
+                    <!--<ImageBrush ImageSource="{StaticResource appbar_user}"-->
+                    <!--<VisualBrush Visual="{StaticResource appbar_user}" />-->
+                    <ImageBrush ImageSource="Images/windesktop.jpg" />
+                </Controls:Tile.Background>
+            </Controls:Tile>
+            <Controls:Tile Title="Finance" Style="{StaticResource LargeTileStyle}" Background="Green" />
+            <Controls:Tile Title="People" Style="{StaticResource LargeTileStyle}" Background="#D2691E" />
+            <Controls:Tile Title="Weather" Style="{StaticResource LargeTileStyle}" Background="#1E90FF" />
+            <Controls:Tile Title="Weather" Style="{StaticResource SmallTileStyle}" Background="#1E90FF" />
+            <Controls:Tile Title="Store" Style="{StaticResource SmallTileStyle}" Background="Green" />
+        </WrapPanel>
     </Grid>
+
+    <!--<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Controls:Tile Grid.Column="0" Grid.Row="1" Margin="23,21,20,19" Height="Auto" Width="Auto" Title="Usuario">
+            <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96">
+                <Rectangle.Fill>
+                    <VisualBrush Visual="{StaticResource appbar_user}" />
+                </Rectangle.Fill>
+            </Rectangle>
+            --><!--<Image Source="/TutoMahapps;component/Img/Calculater.png" Width="110" Height="105"/>--><!--
+        </Controls:Tile>
+    <StackPanel>
+        
+        
+    </StackPanel>
+    </Grid>-->
 </Controls:MetroWindow>

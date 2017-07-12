@@ -100,6 +100,9 @@ namespace TecnoMoto.ViewModels
                         //return await Task.FromResult(true);
                     }
                     else
+                    {
+
+                    }
                         //return await Task.FromResult(true);
                     //await db.SaveChangesAsync();
                     //listModel.Add(clientModel);
@@ -112,14 +115,18 @@ namespace TecnoMoto.ViewModels
             }
         }
 
-        public bool isExist()
+        public async Task<bool> isExist(string us, string pass)
         {
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
-                    var client = db.clients.FirstOrDefault();
-                    return true;
+                    var user = db.users.Where(X=> X.USERS.ToUpper() == us.ToUpper() && X.PASS == pass).FirstOrDefault();
+
+                    if (user != null)
+                        return await Task.FromResult(true);
+                    else
+                        return await Task.FromResult(false);
                 }
             }
             catch (Exception)

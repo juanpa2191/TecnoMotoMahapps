@@ -19,7 +19,7 @@ namespace TecnoMoto.Models
         [StringLength(20)]
         public string PASS { get; set; }
 
-        [Column("USER")]
+        [Column("USERS")]
         [StringLength(20)]
         public string USERS { get; set; }
 
