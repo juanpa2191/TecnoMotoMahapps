@@ -8,8 +8,53 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Menu" Height="auto" Width="1138">
-
-    <Window.Resources>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="settings" />
+            
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cupcake}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="deploy cupcakes" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <!--<UserControl></UserControl>-->
+            <Button>
+                <StackPanel Orientation="Horizontal" >
+                    <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_home_empty}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <!--<TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="deploy cupcakes" />-->
+                </StackPanel>
+            </Button>
+            <!--<Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_app_plus}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>-->
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+    <!--<Window.Resources>
         <Style x:Key="LargeTileStyle" TargetType="Controls:Tile">
             <Setter Property="Width" Value="300" />
             <Setter Property="Height" Value="125" />
@@ -21,14 +66,14 @@
             <Setter Property="Height" Value="125" />
             <Setter Property="TitleFontSize" Value="10" />
         </Style>
-    </Window.Resources>
+    </Window.Resources>-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="87*"/>
-            <ColumnDefinition Width="430*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="83*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="259*"/>
         </Grid.RowDefinitions>
 
@@ -36,18 +81,18 @@
                    VerticalAlignment="Center"
                    Text="Start"
                    FontWeight="Light"
-                   Foreground="White"
+                   Foreground="Black"
                    FontSize="30"
                    FontFamily="Segoe UI" />
 
         <WrapPanel Grid.Row="1" Grid.Column="1" Width="940" Height="382" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Controls:Tile Title="Mail" Style="{StaticResource LargeTileStyle}" Content="ImageHere" Background="Teal" Margin="3"/>
-            <Controls:Tile Title="Desktop" Style="{StaticResource LargeTileStyle}"  Margin="3">
-                <Controls:Tile.Background>
-                    <!--<ImageBrush ImageSource="{StaticResource appbar_user}"-->
-                    <!--<VisualBrush Visual="{StaticResource appbar_user}" />-->
-                    <ImageBrush ImageSource="Images/windesktop.jpg" />
-                </Controls:Tile.Background>
+            <Controls:Tile Title="Productos" Style="{StaticResource LargeTileStyle}"  Margin="3" Click="Tile_Click">
+                <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_marketplace}" />
+                    </Rectangle.Fill>
+                </Rectangle>
             </Controls:Tile>
             <Controls:Tile Title="Finance" Style="{StaticResource LargeTileStyle}" Background="Green" />
             <Controls:Tile Title="People" Style="{StaticResource LargeTileStyle}" Background="#D2691E" />
@@ -76,7 +121,9 @@
                     <VisualBrush Visual="{StaticResource appbar_user}" />
                 </Rectangle.Fill>
             </Rectangle>
-            --><!--<Image Source="/TutoMahapps;component/Img/Calculater.png" Width="110" Height="105"/>--><!--
+            -->
+    <!--<Image Source="/TutoMahapps;component/Img/Calculater.png" Width="110" Height="105"/>-->
+    <!--
         </Controls:Tile>
     <StackPanel>
         
