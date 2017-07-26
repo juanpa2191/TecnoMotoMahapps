@@ -51,7 +51,9 @@ namespace TecnoMoto.Views
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
             MyContext.SaveTypeProdAsync(txtNameTypeProd.Text);
+            splitBtnTProd.Items.Refresh();
             flyProd.IsOpen = false;
+
         }
 
 

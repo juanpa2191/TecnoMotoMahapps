@@ -49,8 +49,8 @@
                 HorizontalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Width="166"
-                SelectedIndex="1"
-                ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}"
+                SelectedIndex="0"
+                ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay  }"
                 VerticalAlignment="Center" Margin="37,50,61,72" Height="34" >
                     <Controls:SplitButton.ItemTemplate>
                         <DataTemplate>
@@ -61,7 +61,7 @@
                     </Controls:SplitButton.ItemTemplate>
                 </Controls:SplitButton>
 
-                <Button ToolTip="Update an emplyee record" x:Name="button1" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="52" Margin="208,41,0,0" VerticalAlignment="Top" Width="55" Click="button1_Click">
+                <Button ToolTip="Agregar tipo de producto" x:Name="button1" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="52" Margin="208,41,0,0" VerticalAlignment="Top" Width="55" Click="button1_Click">
                     <Rectangle Width="20" Height="20" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit_add}" />
@@ -86,16 +86,16 @@
         </Grid>
 
         <Grid Grid.Row="3">
-            <DataGrid ItemsSource="{Binding Path=Albums}"
-                  Grid.Row="0"
-                  AutoGenerateColumns="False">
+            <DataGrid Name="listModel1" ItemsSource= "{Binding Path=listProduct}"  AutoGenerateColumns="False" Style="{StaticResource AzureDataGrid}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Genre"
-                                    Binding="{Binding Genre.Name}" />
-                    <Controls:DataGridNumericUpDownColumn Header="Price"
-                                                      Binding="{Binding Price}"
+                    <DataGridTextColumn Header="#Columna" TextSearch.Text="{Binding ID_PRODUCT}"
+                                    Binding="{Binding ID_PRODUCT}" />
+                    <DataGridTextColumn Header="Producto" 
+                                    Binding="{Binding NAME_PRODUCT}" />
+                    <!--<Controls:DataGridNumericUpDownColumn Header="Price"
+                                                      Binding="{Binding ACTIVE}"
                                                       StringFormat="C"
-                                                      Minimum="0" />
+                                                      Minimum="0" />-->
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -126,13 +126,17 @@
 
             
             <Canvas>
+                <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96" Canvas.Left="101" Canvas.Top="32" >
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_marketplace}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
                 <Rectangle Width="130" Height="64" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"  Canvas.Left="74" Canvas.Top="291">
                     <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit_add}" />
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit_add}"  />
                     </Rectangle.OpacityMask>
                 </Rectangle>
-                <Image  Width="110" Height="105" Canvas.Left="74" Canvas.Top="5"/>
-                <TextBox x:Name="txtNameTypeProd" Canvas.Left="44" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese el tipo de producto" Canvas.Top="148" Width="205" Height="30"/>
+                <TextBox x:Name="txtNameTypeProd" Canvas.Left="44" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese el tipo de producto" Canvas.Top="167" Width="205" Height="30"/>
                 <Button x:Name="btnIngresar" Content="Guardar" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" BorderBrush="White" Canvas.Left="44" Canvas.Top="228" Click="btnIngresar_Click" />
             </Canvas>
         </Controls:Flyout>

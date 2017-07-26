@@ -85,6 +85,7 @@
     <Compile Include="ControlUser\HomeUserControl.xaml.cs">
       <DependentUpon>HomeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataManager\ProductDataManager.cs" />
     <Compile Include="Models\bill.cs" />
     <Compile Include="Models\client.cs" />
     <Compile Include="Models\Db_TecnoMotos.cs" />
