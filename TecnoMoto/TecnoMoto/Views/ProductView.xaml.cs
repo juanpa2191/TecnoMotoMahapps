@@ -43,18 +43,18 @@ namespace TecnoMoto.Views
                 e.Handled = true;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            flyProd.IsOpen = true;
-        }
+        //private void button1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    flyProd.IsOpen = true;
+        //}
 
-        private void btnIngresar_Click(object sender, RoutedEventArgs e)
-        {
-            MyContext.SaveTypeProdAsync(txtNameTypeProd.Text);
-            splitBtnTProd.Items.Refresh();
-            flyProd.IsOpen = false;
+        //private void btnIngresar_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MyContext.SaveTypeProdAsync(txtNameTypeProd.Text);
+        //    splitBtnTProd.Items.Refresh();
+        //    flyProd.IsOpen = false;
 
-        }
+        //}
 
 
 

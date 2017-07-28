@@ -25,11 +25,18 @@ namespace TecnoMoto.Views
             InitializeComponent();
         }
 
-        private void Tile_Click(object sender, RoutedEventArgs e)
+        private void Tile_Click_Prod(object sender, RoutedEventArgs e)
         {
             Views.ProductView _prod = new ProductView();
             this.Close();
             _prod.ShowDialog();
+        }
+
+        private void Tile_Click_Type_Prod(object sender, RoutedEventArgs e)
+        {
+            Views.TypeProductView _TProd = new TypeProductView();
+            this.Close();
+            _TProd.ShowDialog();
         }
     }
 }

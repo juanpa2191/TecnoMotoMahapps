@@ -17,6 +17,8 @@ namespace TecnoMoto.Models
 
         public long? ID_BILL { get; set; }
 
+        public long? VALUE { get; set; }
+
         public virtual bill bill { get; set; }
 
         public virtual product product { get; set; }

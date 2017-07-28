@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TecnoMoto.DataManager;
 using TecnoMoto.Models;
 
 namespace TecnoMoto.ViewModels
@@ -14,7 +13,6 @@ namespace TecnoMoto.ViewModels
         #region MyRegion
 
         TypeProductViewModel tpVM = new TypeProductViewModel();
-        ProductDataManager tDM = new ProductDataManager();
         public ICollection<type_product> listTypeProduct { get; set; }
 
         public ICollection<product> listProduct { get; set; }
@@ -25,7 +23,7 @@ namespace TecnoMoto.ViewModels
         public ProductViewModel()
         {
             listTypeProduct = tpVM.ListTypeProd();
-            listProduct = tDM.FindProduct();
+            listProduct = FindProduct();
 
         }
 
@@ -38,8 +36,8 @@ namespace TecnoMoto.ViewModels
                 {
                     tp = new type_product()
                     {
-                        ACTIVE = "1",
-                        NAME_TYE_PRODUCT = name
+                        ACTIVE = true,
+                        NAME_TYPE_PRODUCT = name
                     };
 
                     db.type_product.Add(tp);
@@ -53,6 +51,23 @@ namespace TecnoMoto.ViewModels
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+
+        public List<product> FindProduct()
+        {
+            try
+            {
+                using (Db_TecnoMotos db = new Db_TecnoMotos())
+                {
+                    var list = db.products.Include("provider").Include("type_product").ToList();
+                    return list;
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

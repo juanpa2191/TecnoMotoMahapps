@@ -85,14 +85,14 @@
     <Compile Include="ControlUser\HomeUserControl.xaml.cs">
       <DependentUpon>HomeUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataManager\ProductDataManager.cs" />
     <Compile Include="Models\bill.cs" />
+    <Compile Include="Models\buy.cs" />
     <Compile Include="Models\client.cs" />
     <Compile Include="Models\Db_TecnoMotos.cs" />
     <Compile Include="Models\detail_bill.cs" />
+    <Compile Include="Models\detail_buy.cs" />
     <Compile Include="Models\product.cs" />
     <Compile Include="Models\provider.cs" />
-    <Compile Include="Models\stock.cs" />
     <Compile Include="Models\type_product.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Services\RelayCommand.cs" />
@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TypeProductView.xaml.cs">
+      <DependentUpon>TypeProductView.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlUser\HomeUserControl.xaml">
       <SubType>Designer</SubType>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TypeProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

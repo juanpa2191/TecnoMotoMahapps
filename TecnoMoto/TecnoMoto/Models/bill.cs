@@ -23,6 +23,10 @@ namespace TecnoMoto.Models
 
         public DateTime? DATE_REGISTER { get; set; }
 
+        public string DX { get; set; }
+
+        public string PLAQUE { get; set; }
+
         public virtual client client { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

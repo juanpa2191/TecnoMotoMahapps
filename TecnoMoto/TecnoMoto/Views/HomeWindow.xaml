@@ -11,7 +11,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
-            
+
             <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
@@ -87,7 +87,7 @@
 
         <WrapPanel Grid.Row="1" Grid.Column="1" Width="940" Height="382" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Controls:Tile Title="Mail" Style="{StaticResource LargeTileStyle}" Content="ImageHere" Background="Teal" Margin="3"/>
-            <Controls:Tile Title="Productos" Style="{StaticResource LargeTileStyle}"  Margin="3" Click="Tile_Click">
+            <Controls:Tile Title="Productos" Style="{StaticResource LargeTileStyle}"  Margin="3" Click="Tile_Click_Prod">
                 <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{StaticResource appbar_marketplace}" />
@@ -97,7 +97,13 @@
             <Controls:Tile Title="Finance" Style="{StaticResource LargeTileStyle}" Background="Green" />
             <Controls:Tile Title="People" Style="{StaticResource LargeTileStyle}" Background="#D2691E" />
             <Controls:Tile Title="Weather" Style="{StaticResource LargeTileStyle}" Background="#1E90FF" />
-            <Controls:Tile Title="Weather" Style="{StaticResource SmallTileStyle}" Background="#1E90FF" />
+            <Controls:Tile Title="Tipo producto" Style="{StaticResource SmallTileStyle}" Background="#1E90FF" Click="Tile_Click_Type_Prod" >
+                <Rectangle Margin="0, 0, 0, 0" Width="70" Height="66">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_cogs}"  />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Controls:Tile>
             <Controls:Tile Title="Store" Style="{StaticResource SmallTileStyle}" Background="Green" />
         </WrapPanel>
     </Grid>
