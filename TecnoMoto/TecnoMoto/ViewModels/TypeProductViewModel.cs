@@ -11,6 +11,8 @@ namespace TecnoMoto.ViewModels
     {
 
         #region Properties
+
+        public type_product typeProdModel { get; set; }
         public ICollection<type_product> listTypeProduct { get; set; }
 
         #endregion
@@ -18,6 +20,7 @@ namespace TecnoMoto.ViewModels
 
         public TypeProductViewModel()
         {
+            typeProdModel = new type_product();
             listTypeProduct = ListTypeProd();
         }
 
@@ -38,7 +41,7 @@ namespace TecnoMoto.ViewModels
         }
 
 
-        public async Task<bool> SaveTypeProdAsync(type_product tp)
+        public async Task<bool> SaveTypeProdAsync(string name, bool active)
         {
             using (Db_TecnoMotos db = new Db_TecnoMotos())
             {
@@ -46,9 +49,16 @@ namespace TecnoMoto.ViewModels
                 {
                     try
                     {
+                        type_product tp = new type_product()
+                        {
+                            ACTIVE = active,
+                            NAME_TYPE_PRODUCT = name
+                        };
+                        
                         db.type_product.Add(tp);
                         await db.SaveChangesAsync();
                         tran.Commit();
+                        listTypeProduct.Add(tp);
                         return await Task.FromResult(true);
                     }
                     catch (Exception)

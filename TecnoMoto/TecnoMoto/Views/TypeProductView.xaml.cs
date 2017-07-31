@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TecnoMoto.ViewModels;
 
 namespace TecnoMoto.Views
 {
@@ -20,9 +22,29 @@ namespace TecnoMoto.Views
     /// </summary>
     public partial class TypeProductView : MetroWindow
     {
+
+        #region Properties
+
+        public TypeProductViewModel MyContext { get; set; }
+        #endregion
         public TypeProductView()
         {
             InitializeComponent();
+            MyContext = new TypeProductViewModel();
+            this.DataContext = MyContext;
+        }
+
+        private async void btnIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            var name = txtProd.Text;
+            var ac = switchActive.IsChecked;
+
+            var isValid = await MyContext.SaveTypeProdAsync(name, ac.Value);
+
+            if (isValid)
+                await this.ShowMessageAsync("Exito", "Insercción exitosa", MessageDialogStyle.Affirmative);
+            else
+                await this.ShowMessageAsync("Error !", "Verifica tus datos");
         }
     }
 }

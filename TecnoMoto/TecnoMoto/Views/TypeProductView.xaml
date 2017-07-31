@@ -8,13 +8,37 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Tipo producto" Height="300" Width="300">
+        Title="Tipo producto" Height="400" Width="400">
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <local1:HomeUserControl></local1:HomeUserControl>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBox x:Name="txtProd" Text="{Binding typeProdModel.NAME_TYPE_PRODUCT,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Tipo producto" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Margin="108,33,109,0" BorderBrush="Black"/>
+            <Controls:ToggleSwitch x:Name="switchActive" OnLabel="Si" OffLabel="No" Margin="108,84,109,83" Header="Activo"/>
+            <Button x:Name="btnIngresar" Content="Guardar" HorizontalAlignment="Center" Margin="108,190,109,0" VerticalAlignment="Top" Width="175" BorderBrush="Black" Click="btnIngresar_Click" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <DataGrid Name="listModel1" ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False" Style="{StaticResource AzureDataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#Columna" TextSearch.Text="{Binding ID_TYPE_PRODUCT}"
+                                    Binding="{Binding ID_TYPE_PRODUCT}" />
+                    <DataGridTextColumn Header="Producto" 
+                                    Binding="{Binding NAME_TYPE_PRODUCT}" />
+                    <DataGridTextColumn Header="Activo" 
+                                    Binding="{Binding ACTIVE}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
     </Grid>
 </Controls:MetroWindow>

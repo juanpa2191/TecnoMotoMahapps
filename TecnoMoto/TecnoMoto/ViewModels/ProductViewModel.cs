@@ -62,7 +62,7 @@ namespace TecnoMoto.ViewModels
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
-                    var list = db.products.Include("provider").Include("type_product").ToList();
+                    var list = db.products.Include("type_product").ToList();
                     return list;
                 }
             }

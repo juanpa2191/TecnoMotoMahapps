@@ -39,29 +39,32 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="txtNombre" Grid.Column="0" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese nombre producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="32,30,58,0" Width="174" RenderTransformOrigin="0.259,0.615"/>
 
-            <Grid Grid.Column="0" Width="auto" Margin="0,74,0,30">
-                <Label Content="tipo de producto" Margin="37,10,124,111"/>
-                <Controls:SplitButton 
+            <Label Content="Nombre producto" Grid.Column="0" Margin="40,25,117,209"/>
+            <TextBox x:Name="txtNombre" Grid.Column="0" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese nombre producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="40,66,50,0" Width="174" RenderTransformOrigin="0.259,0.615"/>
+
+            <!--<Grid Grid.Column="0" Width="auto" Margin="0,74,0,30">-->
+            <Label Content="tipo de producto" Grid.Column="0" Margin="40,133,117,101"/>
+            <Controls:SplitButton 
+                Grid.Column="0"
                 x:Name="splitBtnTProd"
                 HorizontalContentAlignment="Left"
                 HorizontalAlignment="Center"
                 VerticalContentAlignment="Center"
-                Width="166"
+                Width="174"
                 SelectedIndex="0"
-                ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay  }"
-                VerticalAlignment="Center" Margin="37,50,61,72" Height="34" >
-                    <Controls:SplitButton.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NAME_TYE_PRODUCT}" VerticalAlignment="Top"/>
-                            </Grid>
-                        </DataTemplate>
-                    </Controls:SplitButton.ItemTemplate>
-                </Controls:SplitButton>
+                ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}"
+                VerticalAlignment="Center" Margin="40,172,50,62" Height="26" >
+                <Controls:SplitButton.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NAME_TYPE_PRODUCT}" VerticalAlignment="Top"/>
+                        </Grid>
+                    </DataTemplate>
+                </Controls:SplitButton.ItemTemplate>
+            </Controls:SplitButton>
 
-                <!--<Button ToolTip="Agregar tipo de producto" x:Name="button1" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="52" Margin="208,41,0,0" VerticalAlignment="Top" Width="55" Click="button1_Click">
+            <!--<Button ToolTip="Agregar tipo de producto" x:Name="button1" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="52" Margin="208,41,0,0" VerticalAlignment="Top" Width="55" Click="button1_Click">
                     <Rectangle Width="20" Height="20" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit_add}" />
@@ -69,12 +72,17 @@
                     </Rectangle>
                 </Button>-->
 
-            </Grid>
+            <!--</Grid>-->
 
-            <TextBox x:Name="txtDescrip" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Descripción del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="46,30,33,0" Width="174"/>
-            <TextBox x:Name="txtPrecio" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Precio" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="47,130,33,0" Width="174" KeyDown="txtPrecio_KeyDown"/>
-            <TextBox x:Name="txtCodigo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Codigo del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="46,30,33,0" Width="174"/>
-            <Controls:ToggleSwitch OnLabel="Si" OffLabel="No" Grid.Column="2" Margin="46,100,33,72" Header="Activo"/>
+            <Label Content="Descripción del producto" Grid.Column="1" Margin="52,30,38,204"/>
+            <TextBox x:Name="txtDescrip" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Descripción del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,38,0" Width="174"/>
+
+            <Label Content="Precio del producto" Grid.Column="1" Margin="52,133,38,101"/>
+            <TextBox x:Name="txtPrecio" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Precio" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,172,38,0" Width="174" KeyDown="txtPrecio_KeyDown"/>
+
+            <Label Content="Codigo del producto" Grid.Column="2" Margin="52,30,28,204"/>
+            <TextBox x:Name="txtCodigo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Codigo del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,28,0" Width="184"/>
+            <Controls:ToggleSwitch OnLabel="Si" OffLabel="No" Grid.Column="2" Margin="52,133,28,62" Header="Activo"/>
             <!--<TextBox x:Name="txtActivo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Activo" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="46.5,101,33.5,0" Width="174"/>-->
 
         </Grid>
@@ -92,15 +100,19 @@
                                     Binding="{Binding ID_PRODUCT}" />
                     <DataGridTextColumn Header="Producto" 
                                     Binding="{Binding NAME_PRODUCT}" />
-                    <!--<Controls:DataGridNumericUpDownColumn Header="Price"
-                                                      Binding="{Binding ACTIVE}"
+                    <DataGridTextColumn Header="Tipo producto" 
+                                    Binding="{Binding type_product.NAME_TYPE_PRODUCT}" />
+                    <DataGridTextColumn Header="Activo" 
+                                    Binding="{Binding ACTIVE}" />
+                    <Controls:DataGridNumericUpDownColumn Header="Valor"
+                                                      Binding="{Binding VALUE_PRODUCT}"
                                                       StringFormat="C"
-                                                      Minimum="0" />-->
+                                                      Minimum="0" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
-        
+
+
 
 
 

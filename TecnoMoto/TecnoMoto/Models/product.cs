@@ -24,8 +24,6 @@ namespace TecnoMoto.Models
 
         public bool ACTIVE { get; set; }
 
-        public long? ID_PROVIDER { get; set; }
-
         public long? ID_TYPE_PRODUCT { get; set; }
 
         public long? VALUE_PRODUCT { get; set; }
