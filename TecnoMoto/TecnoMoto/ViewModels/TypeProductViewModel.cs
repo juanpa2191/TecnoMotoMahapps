@@ -1,20 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TecnoMoto.Models;
+using TecnoMoto.Services;
 
 namespace TecnoMoto.ViewModels
 {
-    public class TypeProductViewModel
+    public class TypeProductViewModel : ObservableObject
     {
 
         #region Properties
 
-        public type_product typeProdModel { get; set; }
-        public ICollection<type_product> listTypeProduct { get; set; }
+        public type_product _typeProdModel;
+        public type_product typeProdModel
+        {
+            get { return _typeProdModel; }
+            set
+            {
+                _typeProdModel = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public ObservableCollection<type_product> listTypeProduct { get; set; }
         #endregion
 
 
@@ -24,14 +37,13 @@ namespace TecnoMoto.ViewModels
             listTypeProduct = ListTypeProd();
         }
 
-        public ICollection<type_product> ListTypeProd()
+        public ObservableCollection<type_product> ListTypeProd()
         {
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
-                    var list = db.type_product.ToList();
-                    return list;
+                    return new ObservableCollection<type_product>(db.type_product.ToList());
                 }
             }
             catch (Exception)
@@ -54,11 +66,12 @@ namespace TecnoMoto.ViewModels
                             ACTIVE = active,
                             NAME_TYPE_PRODUCT = name
                         };
-                        
+
                         db.type_product.Add(tp);
                         await db.SaveChangesAsync();
                         tran.Commit();
                         listTypeProduct.Add(tp);
+                        typeProdModel = new type_product();
                         return await Task.FromResult(true);
                     }
                     catch (Exception)

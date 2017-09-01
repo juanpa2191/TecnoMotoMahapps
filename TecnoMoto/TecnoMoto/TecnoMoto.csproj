@@ -95,6 +95,7 @@
     <Compile Include="Models\provider.cs" />
     <Compile Include="Models\type_product.cs" />
     <Compile Include="Models\users.cs" />
+    <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\TypeProductViewModel.cs" />

@@ -28,14 +28,31 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <DataGrid Name="listModel1" ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False" Style="{StaticResource AzureDataGrid}">
+            <DataGrid Name="listModel1" 
+                      ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      CanUserResizeColumns="False" 
+                      AutoGenerateColumns="False" 
+                      SelectionUnit="FullRow"
+                      Style="{StaticResource AzureDataGrid}"
+                      MouseDoubleClick="listModel1_MouseDoubleClick">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#Columna" TextSearch.Text="{Binding ID_TYPE_PRODUCT}"
-                                    Binding="{Binding ID_TYPE_PRODUCT}" />
+                    <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        Header="Seleccion"
+                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"
+                                        />
+                    <DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_TYPE_PRODUCT}"
+                                        Binding="{Binding ID_TYPE_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="False"/>
                     <DataGridTextColumn Header="Producto" 
-                                    Binding="{Binding NAME_TYPE_PRODUCT}" />
+                                        Binding="{Binding NAME_TYPE_PRODUCT}" 
+                                        IsReadOnly="False"/>
                     <DataGridTextColumn Header="Activo" 
-                                    Binding="{Binding ACTIVE}" />
+                                        IsReadOnly="False"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding ACTIVE}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
