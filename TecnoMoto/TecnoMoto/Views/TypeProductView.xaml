@@ -45,12 +45,12 @@
                                         TextSearch.Text="{Binding ID_TYPE_PRODUCT}"
                                         Binding="{Binding ID_TYPE_PRODUCT}" 
                                         Selector.IsSelected="False"
-                                        IsReadOnly="False"/>
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Producto" 
                                         Binding="{Binding NAME_TYPE_PRODUCT}" 
-                                        IsReadOnly="False"/>
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Activo" 
-                                        IsReadOnly="False"
+                                        IsReadOnly="True"
                                         CellStyle="{StaticResource MetroDataGridCell}"
                                         Binding="{Binding ACTIVE}" />
                 </DataGrid.Columns>
