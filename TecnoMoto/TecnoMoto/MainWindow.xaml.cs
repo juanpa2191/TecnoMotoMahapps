@@ -34,38 +34,36 @@ namespace TecnoMoto
 
         private async void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            UserViewModel userVM = new UserViewModel();
-
-            string us = txtUsuario.Text;
-            string pass = txtPassword.Password;
-            if (string.IsNullOrEmpty(us) && string.IsNullOrEmpty(pass))
-                await this.ShowMessageAsync("Error !", "Campos vacios");
-            else
+            try
             {
-                if (await userVM.isExist(us, pass))
-                {
-                    await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
-                    Views.HomeWindow _ver = new Views.HomeWindow();
-                    this.Close();
-                    _ver.ShowDialog();
-                }
+                UserViewModel userVM = new UserViewModel();
+
+                string us = txtUsuario.Text;
+                string pass = txtPassword.Password;
+                if (string.IsNullOrEmpty(us) && string.IsNullOrEmpty(pass))
+                    await this.ShowMessageAsync("Error !", "Campos vacios");
                 else
                 {
-                    txtPassword.Clear();
-                    txtUsuario.Clear();
-                    await this.ShowMessageAsync("Error !", "Verifica tus datos");
+                    if (await userVM.isExist(us, pass))
+                    {
+                        await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
+                        Views.HomeWindow _ver = new Views.HomeWindow();
+                        this.Close();
+                        _ver.ShowDialog();
+                    }
+                    else
+                    {
+                        txtPassword.Clear();
+                        txtUsuario.Clear();
+                        await this.ShowMessageAsync("Error !", "Verifica tus datos");
+                    }
                 }
             }
-
-            //if (txtUsuario.Text == "admin" && txtPassword.Password == "123")
-            //{
-            //    await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
-            //    Views.HomeWindow _ver = new Views.HomeWindow();
-            //    this.Close();
-            //    _ver.ShowDialog();
-            //}
-            //else
-            //    await this.ShowMessageAsync("Error !", "Verifica tus datos");
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("Error !", ex.Message);
+                throw;
+            }
         }
     }
 }

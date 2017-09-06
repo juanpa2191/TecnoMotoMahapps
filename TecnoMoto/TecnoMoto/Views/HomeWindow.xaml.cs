@@ -38,5 +38,12 @@ namespace TecnoMoto.Views
             this.Close();
             _TProd.ShowDialog();
         }
+
+        private void Tile_Click_Provider(object sender, RoutedEventArgs e)
+        {
+            Views.ProviderView _Prov = new ProviderView();
+            this.Close();
+            _Prov.ShowDialog();
+        }
     }
 }

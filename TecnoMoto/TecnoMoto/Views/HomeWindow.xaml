@@ -104,7 +104,13 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Controls:Tile>
-            <Controls:Tile Title="Store" Style="{StaticResource SmallTileStyle}" Background="Green" />
+            <Controls:Tile Title="Proveedor" Style="{StaticResource SmallTileStyle}" Background="Green" Click="Tile_Click_Provider" >
+                <Rectangle Margin="0, 0, 0, 0" Width="70" Height="66">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_customerservice}"  />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Controls:Tile>
         </WrapPanel>
     </Grid>
 

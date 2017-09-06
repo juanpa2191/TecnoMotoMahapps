@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TecnoMoto.Models;
@@ -12,49 +10,51 @@ using TecnoMoto.Services;
 
 namespace TecnoMoto.ViewModels
 {
-    public class TypeProductViewModel : ObservableObject
+    public class ProviderViewModel : ObservableObject
     {
 
         #region Properties
-
-        public type_product _typeProdModel;
-        public type_product typeProdModel
+        public provider _providerModel;
+        public provider providerModel
         {
-            get { return _typeProdModel; }
+            get { return _providerModel; }
             set
             {
-                _typeProdModel = value;
+                _providerModel = value;
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<provider> listProvider { get; set; }
 
-        public ObservableCollection<type_product> listTypeProduct { get; set; }
+
         #endregion
 
 
-        public TypeProductViewModel()
+        public ProviderViewModel()
         {
-            typeProdModel = new type_product();
-            listTypeProduct = ListTypeProd();
+            providerModel = new provider();
+            listProvider = ListProvi();
         }
 
-        public ObservableCollection<type_product> ListTypeProd()
+        #region methods
+        public ObservableCollection<provider> ListProvi()
         {
-            try
+
+            using (Db_TecnoMotos db = new Db_TecnoMotos())
             {
-                using (Db_TecnoMotos db = new Db_TecnoMotos())
+                try
                 {
-                    return new ObservableCollection<type_product>(db.type_product.ToList());
+                    return new ObservableCollection<provider>(db.providers.ToList());
+                }
+                catch (Exception)
+                {
+                    throw;
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
 
-        public async Task<bool> SaveTypeProdAsync(type_product tp)
+        public async Task<bool> SaveProviderAsync(provider tp)
         {
             using (Db_TecnoMotos db = new Db_TecnoMotos())
             {
@@ -62,11 +62,11 @@ namespace TecnoMoto.ViewModels
                 {
                     try
                     {
-                        db.type_product.Add(tp);
+                        db.providers.Add(tp);
                         await db.SaveChangesAsync();
                         tran.Commit();
-                        listTypeProduct.Add(tp);
-                        typeProdModel = new type_product();
+                        listProvider.Add(tp);
+                        providerModel = new provider();
                         return await Task.FromResult(true);
                     }
                     catch (Exception)
@@ -77,8 +77,7 @@ namespace TecnoMoto.ViewModels
                 }
             }
         }
-
-        public async Task<bool> UpdateTypeProdAsync(type_product prod)
+        public async Task<bool> UpdateProviderAsync(provider prod)
         {
             try
             {
@@ -86,10 +85,9 @@ namespace TecnoMoto.ViewModels
                 {
                     db.Entry(prod).State = EntityState.Modified;
                     await db.SaveChangesAsync();
-
-                    var pro = listTypeProduct.Where(x => x.ID_TYPE_PRODUCT == prod.ID_TYPE_PRODUCT).FirstOrDefault();
+                    var pro = listProvider.Where(X => X.ID_PROVIDER == prod.ID_PROVIDER).First();
                     pro = prod;
-                    typeProdModel = new type_product();
+                    providerModel = new provider();
                     return true;
                 }
             }
@@ -99,6 +97,8 @@ namespace TecnoMoto.ViewModels
                 throw;
             }
         }
+
+        #endregion
 
     }
 }

@@ -1,0 +1,109 @@
+﻿<Controls:MetroWindow x:Class="TecnoMoto.Views.ProviderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TecnoMoto.Views"
+        xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local1="clr-namespace:TecnoMoto.ControlUser"
+        mc:Ignorable="d"
+        Title="Proveedor" Height="500" Width="500">
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <local1:HomeUserControl></local1:HomeUserControl>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="40px"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Nombre proveedor:" Margin="0,24,0,165" Grid.Column="0"></Label>
+            <Label Content="Telefono:" Margin="0,66,0,122" Grid.Column="0"></Label>
+            <Label Content="Activo:" Margin="0,113,0,69" Grid.Column="0"></Label>
+
+            <TextBox 
+                Text="{Binding providerModel.NAME_PROVIDER,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
+                Margin="10,24,28,0" 
+                HorizontalAlignment="Center" 
+                Controls:TextBoxHelper.ClearTextButton="True" 
+                Controls:TextBoxHelper.Watermark="Nombre Proveedor"
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top"
+                BorderBrush="Black" 
+                Width="158"
+                Grid.Column="1"
+                KeyDown="TextBox_KeyDown"/>
+
+            <TextBox 
+                Text="{Binding providerModel.PHONE,Mode=TwoWay}" 
+                Margin="10,66,28,0" 
+                HorizontalAlignment="Center" 
+                Controls:TextBoxHelper.ClearTextButton="True" 
+                Controls:TextBoxHelper.Watermark="Telefono"
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top"
+                BorderBrush="Black"
+                Grid.Column="1" 
+                Width="158"
+                KeyDown="txtTelefono_KeyDown"/>
+
+            <Controls:ToggleSwitch 
+                Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" 
+                x:Name="dishesSelection"
+                HorizontalAlignment="Center" 
+                ContentDirection="RightToLeft" 
+                OnLabel="Si" 
+                OffLabel="No"
+                Margin="10,113,110,69"
+                Grid.Column="1"
+                IsChecked="{Binding providerModel.ACTIVE,Mode=TwoWay}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button x:Name="btnSave" Content="Guardar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" BorderBrush="Black" Click="btnSave_provider" />
+        </Grid>
+
+
+        <Grid Grid.Row="2">
+            <DataGrid Name="listModel1" 
+                      ItemsSource="{Binding Path=listProvider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      CanUserResizeColumns="False" 
+                      AutoGenerateColumns="False" 
+                      SelectionUnit="FullRow"
+                      Style="{StaticResource AzureDataGrid}"
+                      MouseDoubleClick="listModel1_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        Header="Seleccion"
+                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_PROVIDER}"
+                                        Binding="{Binding ID_PROVIDER}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Nombre proveedor" 
+                                        Binding="{Binding NAME_PROVIDER}" 
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Telefono" 
+                                        Binding="{Binding PHONE}" 
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Activo" 
+                                        IsReadOnly="True"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding ACTIVE}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</Controls:MetroWindow>

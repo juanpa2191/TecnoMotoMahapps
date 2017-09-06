@@ -2,7 +2,6 @@
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,29 +19,29 @@ using TecnoMoto.ViewModels;
 namespace TecnoMoto.Views
 {
     /// <summary>
-    /// Lógica de interacción para TypeProductView.xaml
+    /// Lógica de interacción para ProviderView.xaml
     /// </summary>
-    public partial class TypeProductView : MetroWindow
+    public partial class ProviderView : MetroWindow
     {
-
         #region Properties
+        public ProviderViewModel MyContext { get; set; }
 
-        public TypeProductViewModel MyContext { get; set; }
         #endregion
-        public TypeProductView()
+
+        public ProviderView()
         {
             InitializeComponent();
-            MyContext = new TypeProductViewModel();
+            MyContext = new ProviderViewModel();
             this.DataContext = MyContext;
         }
 
-        private async void btnIngresar_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_provider(object sender, RoutedEventArgs e)
         {
             bool isValid;
-            if (MyContext.typeProdModel.ID_TYPE_PRODUCT != 0)
-                isValid = await MyContext.UpdateTypeProdAsync(MyContext.typeProdModel);
+            if (MyContext.providerModel.ID_PROVIDER != 0)
+                isValid = await MyContext.UpdateProviderAsync(MyContext.providerModel);
             else
-                isValid = await MyContext.SaveTypeProdAsync(MyContext.typeProdModel);
+                isValid = await MyContext.SaveProviderAsync(MyContext.providerModel);
 
             if (isValid)
                 await this.ShowMessageAsync("Exito", "Insercción exitosa", MessageDialogStyle.Affirmative);
@@ -58,9 +57,25 @@ namespace TecnoMoto.Views
                 if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
                 {
                     DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
-                    MyContext.typeProdModel = dgr.DataContext as type_product;
+                    MyContext.providerModel = dgr.DataContext as provider;
                 }
             }
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(MyContext.providerModel.NAME_PROVIDER))
+            {
+                var asd = MyContext.listProvider.Where(X => X.NAME_PROVIDER.Contains(MyContext.providerModel.NAME_PROVIDER)).ToList();
+            }
+        }
+
+        private void txtTelefono_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
     }
 }
