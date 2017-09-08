@@ -19,7 +19,7 @@ namespace TecnoMoto.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long ID_BILL { get; set; }
 
-        public long? ID_CLIENT { get; set; }
+        public long? ID_USER { get; set; }
 
         public DateTime? DATE_REGISTER { get; set; }
 
@@ -27,7 +27,7 @@ namespace TecnoMoto.Models
 
         public string PLAQUE { get; set; }
 
-        public virtual client client { get; set; }
+        public virtual users users { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<detail_bill> detail_bill { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ using TecnoMoto.Services;
 
 namespace TecnoMoto.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : ObservableObject
     {
 
         #region Properties
@@ -19,12 +21,7 @@ namespace TecnoMoto.ViewModels
 
         public ICommand RefreshCommand { get; set; }
 
-        //private ICommand toggleExecuteCommand { get; set; }
-
-        public users userModel { get; set; }
-       // public client clientModel { get; set; }
-
-        //public ObservableCollection<client> listModel { get; set; }
+        //public users userModel { get; set; }
 
         public bool CanExecute
         {
@@ -44,37 +41,21 @@ namespace TecnoMoto.ViewModels
             }
         }
 
-        /*public ICommand ToggleExecuteCommand
+        public ObservableCollection<users> listUsers { get; set; }
+
+        public ObservableCollection<type_user> listTypeUser { get; set; }
+
+        private users _userModel;
+
+        public users userModel
         {
-            get
-            {
-                return toggleExecuteCommand;
-            }
+            get { return _userModel; }
             set
             {
-                toggleExecuteCommand = value;
+                _userModel = value;
+                OnPropertyChanged();
             }
         }
-
-        public ICommand HiButtonCommand
-        {
-            get
-            {
-                return RefreshCommand;
-            }
-            set
-            {
-                RefreshCommand = value;
-            }
-        }*/
-
-        //public struct Tipos
-        //{
-        //    public int ID { get; set; }
-        //    public string Display { get; set; }
-        //}
-
-        //public ObservableCollection<Tipos> TiposID { get; set; }
 
         #endregion
 
@@ -83,10 +64,12 @@ namespace TecnoMoto.ViewModels
         {
             userModel = new users();
             RefreshCommand = new RelayCommand(SaveClient, param => this.CanExecute);
+            listUsers = ListUsers();
+            listTypeUser = ListTUsers();
         }
 
-
-        private  void SaveClient(object obj)
+        #region Methods
+        private void SaveClient(object obj)
         {
             try
             {
@@ -103,7 +86,7 @@ namespace TecnoMoto.ViewModels
                     {
 
                     }
-                        //return await Task.FromResult(true);
+                    //return await Task.FromResult(true);
                     //await db.SaveChangesAsync();
                     //listModel.Add(clientModel);
                 }
@@ -121,7 +104,7 @@ namespace TecnoMoto.ViewModels
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
-                    var user = db.users.Where(X=> X.USERS.ToUpper() == us.ToUpper() && X.PASS == pass).FirstOrDefault();
+                    var user = db.users.Where(X => X.USERS.ToUpper() == us.ToUpper() && X.PASS == pass).FirstOrDefault();
 
                     if (user != null)
                         return await Task.FromResult(true);
@@ -135,5 +118,109 @@ namespace TecnoMoto.ViewModels
                 throw;
             }
         }
+
+        public ObservableCollection<users> ListUsers()
+        {
+
+            using (Db_TecnoMotos db = new Db_TecnoMotos())
+            {
+                try
+                {
+                    return new ObservableCollection<users>(db.users.Include(J => J.type_user).ToList());
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public ObservableCollection<type_user> ListTUsers()
+        {
+
+            using (Db_TecnoMotos db = new Db_TecnoMotos())
+            {
+                try
+                {
+                    return new ObservableCollection<type_user>(db.type_user.ToList());
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+
+        public async Task<bool> SaveUserAsync(users u)
+        {
+            using (Db_TecnoMotos db = new Db_TecnoMotos())
+            {
+                using (var tran = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        db.users.Add(u);
+                        await db.SaveChangesAsync();
+                        tran.Commit();
+                        listUsers.Add(u);
+                        userModel = new users();
+                        return await Task.FromResult(true);
+                    }
+                    catch (Exception)
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+        public async Task<bool> UpdateUserAsync(users us)
+        {
+            try
+            {
+                using (Db_TecnoMotos db = new Db_TecnoMotos())
+                {
+                    db.Entry(us).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    var pro = listUsers.Where(X => X.ID_USER == us.ID_USER).First();
+                    pro = us;
+                    userModel = new users();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public async Task<bool> IsValid(users us , string pass, string pass1)
+        {
+            try
+            {
+                if (pass.Equals(pass1) 
+                    || !(string.IsNullOrEmpty(us.PHONE) 
+                    || string.IsNullOrEmpty(us.USERNAME) 
+                    || string.IsNullOrEmpty(us.USERS) 
+                    || us.ID_TYPE_USER == 0))
+                    return await Task.FromResult(true);
+                else
+                    return await Task.FromResult(false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+
+
+
     }
 }

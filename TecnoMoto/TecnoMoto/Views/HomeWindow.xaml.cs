@@ -41,9 +41,9 @@ namespace TecnoMoto.Views
 
         private void Tile_Click_Provider(object sender, RoutedEventArgs e)
         {
-            Views.ProviderView _Prov = new ProviderView();
+            Views.UserView _User = new UserView();
             this.Close();
-            _Prov.ShowDialog();
+            _User.ShowDialog();
         }
     }
 }

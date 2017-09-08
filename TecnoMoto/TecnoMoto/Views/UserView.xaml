@@ -1,0 +1,176 @@
+﻿<Controls:MetroWindow x:Class="TecnoMoto.Views.UserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TecnoMoto.Views"
+        xmlns:local1="clr-namespace:TecnoMoto.ControlUser"
+        xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="Usuario" Height="600" Width="600">
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <local1:HomeUserControl></local1:HomeUserControl>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="Nombre: " 
+                   Grid.Column="0" 
+                   Margin="24,31,198,126"/>
+            <TextBox x:Name="txtName" 
+                     Text="{Binding userModel.USERNAME,Mode=TwoWay}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Nombre" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     Width="131" 
+                     Margin="130,31,35,0" 
+                     BorderBrush="Black" 
+                     Height="13"
+                     Grid.Column="0"/>
+            <Label Content="Usuario:" 
+                   Grid.Column="0" 
+                   Margin="24,81,198,76"/>
+            <TextBox x:Name="txtUser" 
+                     Text="{Binding userModel.USERS,Mode=TwoWay}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Usuario" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     Width="131" 
+                     Margin="130,81,35,0" 
+                     BorderBrush="Black" 
+                     Height="13"
+                     Grid.Column="0"/>
+
+            <Label Content="Contraseña:" 
+                   Grid.Column="0" 
+                   Margin="24,126,198,31"/>
+            <PasswordBox x:Name="txtPass" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Contraseña" 
+                     VerticalAlignment="Top" 
+                     Width="131" 
+                     Margin="130,126,35,0" 
+                     BorderBrush="Black" 
+                     Height="13"
+                     Grid.Column="0"/>
+
+            <Label Content="Telefono: " 
+                   Grid.Column="1" 
+                   Margin="10,33,204,123"/>
+            <TextBox x:Name="txtNsame" 
+                     Text="{Binding userModel.PHONE,Mode=TwoWay}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Telefono" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     Width="131" 
+                     Margin="113,33,52,0" 
+                     BorderBrush="Black" 
+                     Height="13"
+                     Grid.Column="1"/>
+            <Label Content="Tipo Usuario" 
+                   Grid.Column="1" 
+                   Margin="10,81,204,74"/>
+            <Controls:SplitButton 
+                Grid.Column="1"
+                x:Name="splitBtnTUser"
+                HorizontalContentAlignment="Left"
+                HorizontalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Width="131"
+                SelectedIndex="0"
+                ItemsSource="{Binding Path=listTypeUser, Mode=TwoWay}"
+                VerticalAlignment="Center" 
+                Margin="113,80,52,73"  Height="27" >
+                <Controls:SplitButton.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TYPE_USER}" VerticalAlignment="Top"/>
+                        </Grid>
+                    </DataTemplate>
+                </Controls:SplitButton.ItemTemplate>
+            </Controls:SplitButton>
+            <Label Content="Contraseña:" 
+                   Grid.Column="1" 
+                   Margin="10,126,204,31"/>
+            <PasswordBox x:Name="txtPass1" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Contraseña" 
+                     VerticalAlignment="Top" 
+                     Width="131" 
+                     Margin="113,126,52,0" 
+                     BorderBrush="Black" 
+                     Height="13"
+                     Grid.Column="1"/>
+        </Grid>
+
+        <Button x:Name="btnSave" 
+                Content="Guardar" 
+                HorizontalAlignment="Center" 
+                Margin="194,0,223,5" 
+                VerticalAlignment="Center" 
+                Width="175" 
+                BorderBrush="Black" 
+                Grid.Row="1"
+                Click="btnSave_Click"/>
+
+        <Grid Grid.Row="2">
+            <DataGrid Name="listModel1" 
+                      ItemsSource="{Binding Path=listUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      CanUserResizeColumns="False" 
+                      AutoGenerateColumns="False" 
+                      SelectionUnit="FullRow"
+                      Style="{StaticResource AzureDataGrid}"
+                      MouseDoubleClick="listModel1_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        Header="Seleccion"
+                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"
+                                        />
+                    <DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_USER}"
+                                        Binding="{Binding ID_USER}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Nombre" 
+                                        Binding="{Binding USERNAME}" 
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Usuario" 
+                                        IsReadOnly="True"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding USERS}" />
+                    <DataGridTextColumn Header="Telefono" 
+                                        IsReadOnly="True"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding PHONE}" />
+                    <DataGridTextColumn Header="Tipo Usuario" 
+                                        IsReadOnly="True"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding type_user.TYPE_USER}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</Controls:MetroWindow>

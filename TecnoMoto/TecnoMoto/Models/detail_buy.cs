@@ -21,6 +21,8 @@ namespace TecnoMoto.Models
 
         public long? VALUE { get; set; }
 
+        public long? CANT { get; set; }
+
         public virtual buy buy { get; set; }
 
         public virtual product product { get; set; }

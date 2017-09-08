@@ -24,7 +24,9 @@ namespace TecnoMoto.Models
 
         public DateTime? DATE_REGISTER { get; set; }
 
-        public virtual provider provider { get; set; }
+        public long ID_USER { get; set; }
+
+        public virtual users users { get; set; }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

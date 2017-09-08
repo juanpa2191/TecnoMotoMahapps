@@ -13,10 +13,11 @@ namespace TecnoMoto.Models
         }
 
         public virtual DbSet<bill> bills { get; set; }
-        public virtual DbSet<client> clients { get; set; }
+        //public virtual DbSet<client> clients { get; set; }
         public virtual DbSet<detail_bill> detail_bill { get; set; }
+        public virtual DbSet<type_user> type_user { get; set; }
         public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<provider> providers { get; set; }
+        //public virtual DbSet<provider> providers { get; set; }
         public virtual DbSet<type_product> type_product { get; set; }
         public virtual DbSet<users> users { get; set; }
         public virtual DbSet<buy> buy { get; set; }
@@ -24,16 +25,8 @@ namespace TecnoMoto.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<client>()
-                .Property(e => e.DOCUMENT)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<client>()
-                .Property(e => e.TYPE_DOCUMENT)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<client>()
-                .Property(e => e.NAME_CLIENT)
+            modelBuilder.Entity<type_user>()
+                .Property(e => e.TYPE_USER)
                 .IsUnicode(false);
 
             modelBuilder.Entity<product>()
@@ -43,12 +36,12 @@ namespace TecnoMoto.Models
             modelBuilder.Entity<product>()
                 .Property(e => e.ACTIVE);
 
-            modelBuilder.Entity<provider>()
-                .Property(e => e.NAME_PROVIDER)
-                .IsUnicode(false);
+            //modelBuilder.Entity<provider>()
+            //    .Property(e => e.NAME_PROVIDER)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<provider>()
-                .Property(e => e.ACTIVE);
+            //modelBuilder.Entity<provider>()
+            //    .Property(e => e.ACTIVE);
 
             modelBuilder.Entity<type_product>()
                 .Property(e => e.NAME_TYPE_PRODUCT)
@@ -69,9 +62,9 @@ namespace TecnoMoto.Models
                 .Property(e => e.USERS)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<users>()
-                .Property(e => e.CARGO)
-                .IsUnicode(false);
+            //modelBuilder.Entity<users>()
+            //    .Property(e => e.CHARGE)
+            //    .IsUnicode(false);
         }
     }
 }

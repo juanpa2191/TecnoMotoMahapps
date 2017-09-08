@@ -87,13 +87,12 @@
     </Compile>
     <Compile Include="Models\bill.cs" />
     <Compile Include="Models\buy.cs" />
-    <Compile Include="Models\client.cs" />
     <Compile Include="Models\Db_TecnoMotos.cs" />
     <Compile Include="Models\detail_bill.cs" />
     <Compile Include="Models\detail_buy.cs" />
     <Compile Include="Models\product.cs" />
-    <Compile Include="Models\provider.cs" />
     <Compile Include="Models\type_product.cs" />
+    <Compile Include="Models\type_user.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
@@ -107,11 +106,11 @@
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProviderView.xaml.cs">
-      <DependentUpon>ProviderView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TypeProductView.xaml.cs">
       <DependentUpon>TypeProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlUser\HomeUserControl.xaml">
       <SubType>Designer</SubType>
@@ -149,11 +148,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProviderView.xaml">
+    <Page Include="Views\TypeProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TypeProductView.xaml">
+    <Page Include="Views\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
