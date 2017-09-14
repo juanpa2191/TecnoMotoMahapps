@@ -152,7 +152,7 @@ namespace TecnoMoto.ViewModels
         }
 
 
-        public async Task<bool> SaveUserAsync(users u)
+        public async Task<bool> SaveUserAsync(users u, type_user tu)
         {
             using (Db_TecnoMotos db = new Db_TecnoMotos())
             {
@@ -160,9 +160,11 @@ namespace TecnoMoto.ViewModels
                 {
                     try
                     {
+                        u.ID_TYPE_USER = tu.ID_TYPE_USER;
                         db.users.Add(u);
                         await db.SaveChangesAsync();
                         tran.Commit();
+                        u.type_user = tu;
                         listUsers.Add(u);
                         userModel = new users();
                         return await Task.FromResult(true);
@@ -175,15 +177,22 @@ namespace TecnoMoto.ViewModels
                 }
             }
         }
-        public async Task<bool> UpdateUserAsync(users us)
+        public async Task<bool> UpdateUserAsync(users us, type_user tu)
         {
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
+                    us.ID_TYPE_USER = tu.ID_TYPE_USER;
+                    us.type_user = tu;
                     db.Entry(us).State = EntityState.Modified;
                     await db.SaveChangesAsync();
+                    //var asd = db.users.Find(us.ID_USER);
+                    //asd.
+                    //us.type_user = tu;
                     var pro = listUsers.Where(X => X.ID_USER == us.ID_USER).First();
+                    listUsers.Remove(pro);
+                    listUsers.Insert(listUsers.Count, us);
                     pro = us;
                     userModel = new users();
                     return true;
@@ -196,7 +205,7 @@ namespace TecnoMoto.ViewModels
             }
         }
 
-        public async Task<bool> IsValid(users us , string pass, string pass1)
+        public async Task<bool> IsValid(users us , type_user tu, string pass, string pass1)
         {
             try
             {
@@ -204,7 +213,8 @@ namespace TecnoMoto.ViewModels
                     || !(string.IsNullOrEmpty(us.PHONE) 
                     || string.IsNullOrEmpty(us.USERNAME) 
                     || string.IsNullOrEmpty(us.USERS) 
-                    || us.ID_TYPE_USER == 0))
+                    || us.ID_TYPE_USER == 0)
+                    || tu != null)
                     return await Task.FromResult(true);
                 else
                     return await Task.FromResult(false);

@@ -36,24 +36,39 @@ namespace TecnoMoto.Views
 
         private void listModel1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (sender != null)
+            {
+                DataGrid grid = sender as DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                    var user = dgr.DataContext as users;
+                    MyContext.userModel = dgr.DataContext as users;
+                    splitBtnTUser.SelectedIndex = ((int)user.type_user.ID_TYPE_USER -1);
+                    txtPass1.Password = user.PASS;
+                    txtPass.Password = user.PASS;
+                }
+            }
         }
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var typeUser = splitBtnTUser.SelectedItem as type_user;
-            MyContext.userModel.type_user = typeUser;
             bool isValid;
-            if (await MyContext.IsValid(MyContext.userModel, txtPass.Password, txtPass1.Password))
+            if (await MyContext.IsValid(MyContext.userModel, typeUser, txtPass.Password, txtPass1.Password))
             {
                 MyContext.userModel.PASS = txtPass.Password;
                 if (MyContext.userModel.ID_USER != 0)
-                    isValid = await MyContext.UpdateUserAsync(MyContext.userModel);
+                    isValid = await MyContext.UpdateUserAsync(MyContext.userModel, typeUser);
                 else
-                    isValid = await MyContext.SaveUserAsync(MyContext.userModel);
+                    isValid = await MyContext.SaveUserAsync(MyContext.userModel, typeUser);
 
                 if (isValid)
+                {
+                    txtPass.Clear();
+                    txtPass1.Clear();
                     await this.ShowMessageAsync("Exito", "Insercción exitosa", MessageDialogStyle.Affirmative);
+                }
                 else
                     await this.ShowMessageAsync("Error !", "Verifica tus datos");
             }

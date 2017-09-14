@@ -7,6 +7,7 @@
         xmlns:local1="clr-namespace:TecnoMoto.ControlUser"
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Productos" Height="600" Width="800">
     <Controls:MetroWindow.LeftWindowCommands>
@@ -78,7 +79,18 @@
             <TextBox x:Name="txtDescrip" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Descripción del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,38,0" Width="174"/>
 
             <Label Content="Precio del producto" Grid.Column="1" Margin="52,133,38,101"/>
-            <TextBox x:Name="txtPrecio" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Precio" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,172,38,0" Width="174" KeyDown="txtPrecio_KeyDown"/>
+            <TextBox x:Name="txtPrecio"
+                     Grid.Column="1" 
+                     Text="{Binding userModel.USERS,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Precio" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     BorderBrush="Black" 
+                     Margin="52,172,38,0" 
+                     Width="174" 
+                     KeyDown="txtPrecio_KeyDown"/>
 
             <Label Content="Codigo del producto" Grid.Column="2" Margin="52,30,28,204"/>
             <TextBox x:Name="txtCodigo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Codigo del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,28,0" Width="184"/>
