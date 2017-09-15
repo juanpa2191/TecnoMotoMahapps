@@ -21,6 +21,9 @@ namespace TecnoMoto.Models
 
         [StringLength(255)]
         public string NAME_PRODUCT { get; set; }
+        [StringLength(255)]
+
+        public string CODE_PRODUCT { get; set; }
 
         public bool ACTIVE { get; set; }
 

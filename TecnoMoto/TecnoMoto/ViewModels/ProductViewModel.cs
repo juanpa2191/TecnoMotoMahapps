@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TecnoMoto.Models;
+using TecnoMoto.Services;
 
 namespace TecnoMoto.ViewModels
 {
-    public class ProductViewModel
+    public class ProductViewModel : ObservableObject
     {
 
         #region MyRegion
 
-        TypeProductViewModel tpVM = new TypeProductViewModel();
-        public ICollection<type_product> listTypeProduct { get; set; }
+        private product _ProductModel;
 
-        public ICollection<product> listProduct { get; set; }
+        public product productModel
+        {
+            get { return _ProductModel; }
+            set
+            {
+                _ProductModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        TypeProductViewModel tpVM = new TypeProductViewModel();
+        public ObservableCollection<type_product> listTypeProduct { get; set; }
+
+        public ObservableCollection<product> listProduct { get; set; }
 
         #endregion
 
 
         public ProductViewModel()
         {
+            productModel = new product();
             listTypeProduct = tpVM.ListTypeProd();
             listProduct = FindProduct();
 
@@ -56,15 +71,12 @@ namespace TecnoMoto.ViewModels
         }
 
 
-        public List<product> FindProduct()
+        public ObservableCollection<product> FindProduct()
         {
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
-                {
-                    var list = db.products.Include("type_product").ToList();
-                    return list;
-                }
+                    return new ObservableCollection<product>(db.products.Include("type_product").ToList());
             }
             catch (Exception)
             {

@@ -7,7 +7,6 @@
         xmlns:local1="clr-namespace:TecnoMoto.ControlUser"
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Productos" Height="600" Width="800">
     <Controls:MetroWindow.LeftWindowCommands>
@@ -42,7 +41,18 @@
 
 
             <Label Content="Nombre producto" Grid.Column="0" Margin="40,25,117,209"/>
-            <TextBox x:Name="txtNombre" Grid.Column="0" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese nombre producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="40,66,50,0" Width="174" RenderTransformOrigin="0.259,0.615"/>
+            <TextBox x:Name="txtNombre" 
+                     Grid.Column="0" 
+                     Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Ingrese nombre producto" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     BorderBrush="Black" 
+                     Margin="40,66,50,0" 
+                     Width="174" 
+                     RenderTransformOrigin="0.259,0.615"/>
 
             <!--<Grid Grid.Column="0" Width="auto" Margin="0,74,0,30">-->
             <Label Content="tipo de producto" Grid.Column="0" Margin="40,133,117,101"/>
@@ -81,7 +91,7 @@
             <Label Content="Precio del producto" Grid.Column="1" Margin="52,133,38,101"/>
             <TextBox x:Name="txtPrecio"
                      Grid.Column="1" 
-                     Text="{Binding userModel.USERS,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" 
+                     Text="{Binding productModel.VALUE_PRODUCT,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" 
                      HorizontalAlignment="Center" 
                      Controls:TextBoxHelper.ClearTextButton="True" 
                      Controls:TextBoxHelper.Watermark="Precio" 
@@ -93,8 +103,29 @@
                      KeyDown="txtPrecio_KeyDown"/>
 
             <Label Content="Codigo del producto" Grid.Column="2" Margin="52,30,28,204"/>
-            <TextBox x:Name="txtCodigo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Codigo del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,28,0" Width="184"/>
-            <Controls:ToggleSwitch OnLabel="Si" OffLabel="No" Grid.Column="2" Margin="52,133,28,62" Header="Activo"/>
+            <TextBox x:Name="txtCodigo" 
+                     Grid.Column="2" 
+                     Text="{Binding productModel.CODE_PRODUCT, Mode=TwoWay}" 
+                     HorizontalAlignment="Center" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="Codigo del producto" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     BorderBrush="Black" 
+                     Margin="52,66,28,0" 
+                     Width="184"/>
+            <Controls:ToggleSwitch 
+                Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                Grid.Column="2" 
+                x:Name="dishesSelection" 
+                Header="Activo"                               
+                ContentDirection="LeftToRight" 
+                OnLabel="Si" 
+                OffLabel="No"
+                Margin="52,133,28,62"
+                IsChecked="{Binding Binding productModel.ACTIVE, Mode=TwoWay}"
+                Visibility="Hidden"/>
+            <!--<Controls:ToggleSwitch OnLabel="Si" OffLabel="No" Grid.Column="2" Margin="52,133,28,62" Header="Activo"/>-->
             <!--<TextBox x:Name="txtActivo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Activo" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="46.5,101,33.5,0" Width="174"/>-->
 
         </Grid>

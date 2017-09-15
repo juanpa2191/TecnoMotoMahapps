@@ -36,6 +36,7 @@ namespace TecnoMoto
         {
             try
             {
+                Wait.IsActive = true;
                 UserViewModel userVM = new UserViewModel();
 
                 string us = txtUsuario.Text;
@@ -46,6 +47,7 @@ namespace TecnoMoto
                 {
                     if (await userVM.isExist(us, pass))
                     {
+                        Wait.IsActive = false;
                         await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
                         Views.HomeWindow _ver = new Views.HomeWindow();
                         this.Close();
@@ -53,6 +55,7 @@ namespace TecnoMoto
                     }
                     else
                     {
+                        Wait.IsActive = false;
                         txtPassword.Clear();
                         txtUsuario.Clear();
                         await this.ShowMessageAsync("Error !", "Verifica tus datos");

@@ -43,7 +43,7 @@
             </Path.Fill>
         </Path>-->
         <!--<Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="120,25,0,0" VerticalAlignment="Top" Width="100" Stretch="Fill" Source="Img/user_man_kid.png"/>-->
-        
 
+        <Controls:ProgressRing Grid.Row="1" Name="Wait" Foreground="{DynamicResource AccentColorBrush}" IsActive="False"/>
     </Grid>
 </Controls:MetroWindow>
