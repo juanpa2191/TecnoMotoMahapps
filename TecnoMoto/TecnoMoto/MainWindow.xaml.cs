@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TecnoMoto.Common;
 using TecnoMoto.ViewModels;
 
 namespace TecnoMoto
@@ -42,13 +43,13 @@ namespace TecnoMoto
                 string us = txtUsuario.Text;
                 string pass = txtPassword.Password;
                 if (string.IsNullOrEmpty(us) && string.IsNullOrEmpty(pass))
-                    await this.ShowMessageAsync("Error !", "Campos vacios");
+                    await this.ShowMessageAsync(Constantes.ERROR, Constantes.CAMPOS_VACIOS);
                 else
                 {
                     if (await userVM.isExist(us, pass))
                     {
                         Wait.IsActive = false;
-                        await this.ShowMessageAsync("Exito", "Tus datos son correctos", MessageDialogStyle.Affirmative);
+                        await this.ShowMessageAsync(Constantes.EXITO, Constantes.DATOS_CORRECTOS, MessageDialogStyle.Affirmative);
                         Views.HomeWindow _ver = new Views.HomeWindow();
                         this.Close();
                         _ver.ShowDialog();
@@ -58,13 +59,13 @@ namespace TecnoMoto
                         Wait.IsActive = false;
                         txtPassword.Clear();
                         txtUsuario.Clear();
-                        await this.ShowMessageAsync("Error !", "Verifica tus datos");
+                        await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
                     }
                 }
             }
             catch (Exception ex)
             {
-                await this.ShowMessageAsync("Error !", ex.Message);
+                await this.ShowMessageAsync(Constantes.ERROR, ex.Message);
                 throw;
             }
         }

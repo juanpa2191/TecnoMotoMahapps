@@ -8,7 +8,7 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Productos" Height="600" Width="800">
+        Title="Productos" Height="600" Width="600">
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <local1:HomeUserControl></local1:HomeUserControl>
@@ -34,13 +34,19 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <!--<ColumnDefinition Width="*"></ColumnDefinition>-->
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--<Button ToolTip="Agregar tipo de producto" x:Name="button1"  HorizontalAlignment="Left" Height="37" Margin="327,122,0,0" VerticalAlignment="Top" Width="32">
+                <Rectangle Width="20" Height="20" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>-->
 
-
-            <Label Content="Nombre producto" Grid.Column="0" Margin="40,25,117,209"/>
+            <Label Content="Nombre producto" Grid.Column="0" Margin="56,30,66,204"/>
             <TextBox x:Name="txtNombre" 
                      Grid.Column="0" 
                      Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
@@ -55,7 +61,7 @@
                      RenderTransformOrigin="0.259,0.615"/>
 
             <!--<Grid Grid.Column="0" Width="auto" Margin="0,74,0,30">-->
-            <Label Content="tipo de producto" Grid.Column="0" Margin="40,133,117,101"/>
+            <Label Content="tipo de producto" Grid.Column="0" Margin="56,133,66,101"/>
             <Controls:SplitButton 
                 Grid.Column="0"
                 x:Name="splitBtnTProd"
@@ -85,10 +91,7 @@
 
             <!--</Grid>-->
 
-            <Label Content="Descripción del producto" Grid.Column="1" Margin="52,30,38,204"/>
-            <TextBox x:Name="txtDescrip" Grid.Column="1" Text="{Binding userModel.USERS,Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Descripción del producto" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="52,66,38,0" Width="174"/>
-
-            <Label Content="Precio del producto" Grid.Column="1" Margin="52,133,38,101"/>
+            <Label Content="Precio del producto" Grid.Column="1" Margin="68,133,54,101"/>
             <TextBox x:Name="txtPrecio"
                      Grid.Column="1" 
                      Text="{Binding productModel.VALUE_PRODUCT,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" 
@@ -102,9 +105,9 @@
                      Width="174" 
                      KeyDown="txtPrecio_KeyDown"/>
 
-            <Label Content="Codigo del producto" Grid.Column="2" Margin="52,30,28,204"/>
+            <Label Content="Codigo del producto" Grid.Column="1" Margin="68,30,44,204"/>
             <TextBox x:Name="txtCodigo" 
-                     Grid.Column="2" 
+                     Grid.Column="1" 
                      Text="{Binding productModel.CODE_PRODUCT, Mode=TwoWay}" 
                      HorizontalAlignment="Center" 
                      Controls:TextBoxHelper.ClearTextButton="True" 
@@ -114,7 +117,7 @@
                      BorderBrush="Black" 
                      Margin="52,66,28,0" 
                      Width="184"/>
-            <Controls:ToggleSwitch 
+            <!--<Controls:ToggleSwitch 
                 Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
                 Grid.Column="2" 
                 x:Name="dishesSelection" 
@@ -122,35 +125,69 @@
                 ContentDirection="LeftToRight" 
                 OnLabel="Si" 
                 OffLabel="No"
-                Margin="52,133,28,62"
-                IsChecked="{Binding Binding productModel.ACTIVE, Mode=TwoWay}"
-                Visibility="Hidden"/>
+                Margin="46,143,34,52"
+                IsChecked="{Binding Binding productModel.ACTIVE, Mode=TwoWay}"/>-->
+
             <!--<Controls:ToggleSwitch OnLabel="Si" OffLabel="No" Grid.Column="2" Margin="52,133,28,62" Header="Activo"/>-->
             <!--<TextBox x:Name="txtActivo" Grid.Column="2" Text="{Binding userModel.USERS, Mode=TwoWay}" HorizontalAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Activo" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="Black" Margin="46.5,101,33.5,0" Width="174"/>-->
 
         </Grid>
 
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Center" Margin="168,10,417,0" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
-            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Center" Margin="387,10,198,0" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
+            <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Center" Margin="83,0,334,0" VerticalAlignment="Top" Width="175" BorderBrush="Black"/>
+            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Center" Margin="302,0,115,0" VerticalAlignment="Top" Width="175" BorderBrush="Black" Click="btnGuardar_Click"/>
 
         </Grid>
 
         <Grid Grid.Row="3">
-            <DataGrid Name="listModel1" ItemsSource= "{Binding Path=listProduct}"  AutoGenerateColumns="False" Style="{StaticResource AzureDataGrid}">
+            <DataGrid Name="listModel1" 
+                      ItemsSource= "{Binding Path=listProduct}"  
+                      AutoGenerateColumns="False"
+                      Style="{StaticResource MetroDataGrid}"
+                       MouseDoubleClick="listModel1_MouseDoubleClick">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#Columna" TextSearch.Text="{Binding ID_PRODUCT}"
-                                    Binding="{Binding ID_PRODUCT}" />
+                    <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        Header="Seleccion"
+                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"
+                                        />
+                    <DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_PRODUCT}"
+                                        Binding="{Binding ID_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Producto" 
-                                    Binding="{Binding NAME_PRODUCT}" />
+                                        Binding="{Binding NAME_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Tipo producto" 
-                                    Binding="{Binding type_product.NAME_TYPE_PRODUCT}" />
-                    <DataGridTextColumn Header="Activo" 
-                                    Binding="{Binding ACTIVE}" />
+                                        Binding="{Binding type_product.NAME_TYPE_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
                     <Controls:DataGridNumericUpDownColumn Header="Valor"
-                                                      Binding="{Binding VALUE_PRODUCT}"
-                                                      StringFormat="C"
-                                                      Minimum="0" />
+                                                          Binding="{Binding VALUE_PRODUCT}"
+                                                          StringFormat="C"
+                                                          Minimum="0" 
+                                                          IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Activo" 
+                                        Binding="{Binding ACTIVE}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
+                    <!--<DataGridTemplateColumn Header="Birthday">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="Agregar tipo de producto" x:Name="button1"  HorizontalAlignment="Left" Height="37" Margin="327,122,0,0" VerticalAlignment="Top" Width="32">
+                                    <Rectangle Width="20" Height="20" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

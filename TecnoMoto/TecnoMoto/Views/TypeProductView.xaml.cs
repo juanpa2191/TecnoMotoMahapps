@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TecnoMoto.Common;
 using TecnoMoto.Models;
 using TecnoMoto.ViewModels;
 
@@ -45,9 +46,9 @@ namespace TecnoMoto.Views
                 isValid = await MyContext.SaveTypeProdAsync(MyContext.typeProdModel);
 
             if (isValid)
-                await this.ShowMessageAsync("Exito", "Insercción exitosa", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Constantes.EXITO, Constantes.INSERCCION_EXITOSA, MessageDialogStyle.Affirmative);
             else
-                await this.ShowMessageAsync("Error !", "Verifica tus datos");
+                await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
         }
 
         private void listModel1_MouseDoubleClick(object sender, MouseButtonEventArgs e)

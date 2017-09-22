@@ -8,6 +8,12 @@ namespace TecnoMoto.Common
 {
     public class Constantes
     {
+        public const string INSERCCION_EXITOSA = "Insercción exitosa";
+        public const string EXITO = "Exito";
+        public const string ERROR = "Error !";
+        public const string VERIFICAR_DATOS = "Verifica tus datos";
+        public const string CAMPOS_VACIOS = "Campos vacios";
+        public const string DATOS_CORRECTOS = "Tus datos son correctos";
 
     }
 
