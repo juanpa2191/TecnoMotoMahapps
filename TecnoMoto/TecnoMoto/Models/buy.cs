@@ -26,6 +26,8 @@ namespace TecnoMoto.Models
 
         public long ID_USER { get; set; }
 
+        public bool COMPLETE { get; set; }
+
         public virtual users users { get; set; }
 
 

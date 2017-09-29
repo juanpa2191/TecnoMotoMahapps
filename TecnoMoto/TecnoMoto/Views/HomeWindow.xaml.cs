@@ -45,5 +45,12 @@ namespace TecnoMoto.Views
             this.Close();
             _User.ShowDialog();
         }
+
+        private void Tile_Click_Buy(object sender, RoutedEventArgs e)
+        {
+            Views.BuyView _User = new BuyView();
+            this.Close();
+            _User.ShowDialog();
+        }
     }
 }

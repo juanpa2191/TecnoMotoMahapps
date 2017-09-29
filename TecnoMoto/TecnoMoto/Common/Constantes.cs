@@ -15,12 +15,21 @@ namespace TecnoMoto.Common
         public const string CAMPOS_VACIOS = "Campos vacios";
         public const string DATOS_CORRECTOS = "Tus datos son correctos";
 
+        public class TipoUsuario
+        {
+            public const long USUARIO = 1;
+            public const long CLIENTE = 2;
+            public const long PROVEEDOR = 3;
+        }
+
     }
 
-    public enum TipoUsuario
-    {
-        USUARIO,
-        CLIENTE,
-        PROVEEDOR
-    }
+    //public enum TipoUsuario
+    //{
+    //    USUARIO = 1,
+    //    CLIENTE,
+    //    PROVEEDOR
+    //}
+
+    
 }

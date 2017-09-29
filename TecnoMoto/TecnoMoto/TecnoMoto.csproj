@@ -97,10 +97,14 @@
     <Compile Include="Models\users.cs" />
     <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="ViewModels\BuyViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\TypeProductViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\BuyView.xaml.cs">
+      <DependentUpon>BuyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -138,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Img.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

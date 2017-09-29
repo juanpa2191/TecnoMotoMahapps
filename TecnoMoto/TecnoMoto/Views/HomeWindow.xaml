@@ -86,7 +86,13 @@
                    FontFamily="Segoe UI" />
 
         <WrapPanel Grid.Row="1" Grid.Column="1" Width="940" Height="382" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Controls:Tile Title="Mail" Style="{StaticResource LargeTileStyle}" Content="ImageHere" Background="Teal" Margin="3"/>
+            <Controls:Tile Title="Compra" Style="{StaticResource LargeTileStyle}" Background="Teal" Margin="3" Click="Tile_Click_Buy">
+                <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_cart}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Controls:Tile>
             <Controls:Tile Title="Productos" Style="{StaticResource LargeTileStyle}"  Margin="3" Click="Tile_Click_Prod">
                 <Rectangle Margin="0, 0, 0, 0" Width="103" Height="96">
                     <Rectangle.Fill>

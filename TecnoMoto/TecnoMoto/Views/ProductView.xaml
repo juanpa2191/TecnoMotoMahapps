@@ -164,11 +164,16 @@
                                         Binding="{Binding type_product.NAME_TYPE_PRODUCT}" 
                                         Selector.IsSelected="False"
                                         IsReadOnly="True"/>
-                    <Controls:DataGridNumericUpDownColumn Header="Valor"
+
+                    <DataGridTextColumn Header="Valor" 
+                                        Binding="{Binding VALUE_PRODUCT, StringFormat= c}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
+                    <!--<Controls:DataGridNumericUpDownColumn Header="Valor"
                                                           Binding="{Binding VALUE_PRODUCT}"
                                                           StringFormat="C"
                                                           Minimum="0" 
-                                                          IsReadOnly="False"/>
+                                                          IsReadOnly="False"/>-->
                     <DataGridTextColumn Header="Activo" 
                                         Binding="{Binding ACTIVE}" 
                                         Selector.IsSelected="False"
