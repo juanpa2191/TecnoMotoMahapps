@@ -110,13 +110,13 @@
                         <VisualBrush Visual="{StaticResource appbar_cart}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Rectangle Width="130" Height="64" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"  Canvas.Left="74" Canvas.Top="291">
+                <!--<Rectangle Width="130" Height="64" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"  Canvas.Left="74" Canvas.Top="291">
                     <Rectangle.OpacityMask>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit_add}"  />
                     </Rectangle.OpacityMask>
-                </Rectangle>
-                <TextBox x:Name="txtNameTypeProd" Canvas.Left="44" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Ingrese el tipo de producto" Canvas.Top="167" Width="205" Height="30"/>
-                <Button x:Name="btnIngresar" Content="Guardar" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" BorderBrush="White" Canvas.Left="44" Canvas.Top="228" />
+                </Rectangle>-->
+                <TextBox x:Name="txtNameTypeProd" Canvas.Left="44" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Nombre" Canvas.Top="167" Width="205" Height="30"/>
+                <Button x:Name="btnIngresar" Content="Buscar" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" BorderBrush="White" Canvas.Left="44" Canvas.Top="228" />
             </Canvas>
         </Controls:Flyout>
     </Grid>
