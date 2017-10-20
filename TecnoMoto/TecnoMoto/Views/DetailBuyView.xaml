@@ -8,8 +8,51 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="DetailBuyView" Height="300" Width="300">
+        Title="Compra" Height="800" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Background="LightSlateGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Proveedores" Grid.Column="0" Foreground="White" Margin="42,14,80,112"/>
+                <Controls:SplitButton 
+                    Grid.Column="0"
+                    x:Name="splitBtnTProd"
+                    HorizontalContentAlignment="Left"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Width="142"
+                    SelectedIndex="0"
+                    ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}"
+                    VerticalAlignment="Center" Margin="42,85,80,43" Height="26" >
+                    <Controls:SplitButton.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NAME_TYPE_PRODUCT}" VerticalAlignment="Top"/>
+                            </Grid>
+                        </DataTemplate>
+                    </Controls:SplitButton.ItemTemplate>
+                </Controls:SplitButton>
+                <Label Content="Documento" Grid.Column="1" Foreground="White" Margin="57,14,65,112"/>
+                <Label Content="Nombre" Grid.Column="1" Foreground="White" Margin="57,83,65,43"/>
+
+            </Grid>
+        </Grid>
+
+
+
     </Grid>
 </Controls:MetroWindow>
