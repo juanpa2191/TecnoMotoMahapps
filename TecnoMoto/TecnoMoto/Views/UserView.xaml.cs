@@ -54,28 +54,33 @@ namespace TecnoMoto.Views
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var typeUser = splitBtnTUser.SelectedItem as type_user;
-            bool isValid;
-            if (await MyContext.IsValid(MyContext.userModel, typeUser, txtPass.Password, txtPass1.Password))
+            if (txtPass1.Password == txtPass.Password)
             {
-                MyContext.userModel.PASS = txtPass.Password;
-                if (MyContext.userModel.ID_USER != 0)
-                    isValid = await MyContext.UpdateUserAsync(MyContext.userModel, typeUser);
-                else
-                    isValid = await MyContext.SaveUserAsync(MyContext.userModel, typeUser);
+                var typeUser = splitBtnTUser.SelectedItem as type_user;
 
-                if (isValid)
+                bool isValid;
+                if (await MyContext.IsValid(MyContext.userModel, typeUser, txtPass.Password, txtPass1.Password))
                 {
-                    txtPass.Clear();
-                    txtPass1.Clear();
-                    await this.ShowMessageAsync(Constantes.EXITO, Constantes.INSERCCION_EXITOSA, MessageDialogStyle.Affirmative);
+                    MyContext.userModel.PASS = txtPass.Password;
+                    if (MyContext.userModel.ID_USER != 0)
+                        isValid = await MyContext.UpdateUserAsync(MyContext.userModel, typeUser);
+                    else
+                        isValid = await MyContext.SaveUserAsync(MyContext.userModel, typeUser);
+
+                    if (isValid)
+                    {
+                        txtPass.Clear();
+                        txtPass1.Clear();
+                        await this.ShowMessageAsync(Constantes.EXITO, Constantes.INSERCCION_EXITOSA, MessageDialogStyle.Affirmative);
+                    }
+                    else
+                        await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
                 }
                 else
                     await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
             }
             else
-                await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
-
+                await this.ShowMessageAsync(Constantes.ERROR, Constantes.CONTRASENA_INCORRECTA);
 
 
         }

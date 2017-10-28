@@ -17,7 +17,6 @@ namespace TecnoMoto.Models
         public virtual DbSet<detail_bill> detail_bill { get; set; }
         public virtual DbSet<type_user> type_user { get; set; }
         public virtual DbSet<product> products { get; set; }
-        //public virtual DbSet<provider> providers { get; set; }
         public virtual DbSet<type_product> type_product { get; set; }
         public virtual DbSet<users> users { get; set; }
         public virtual DbSet<buy> buy { get; set; }

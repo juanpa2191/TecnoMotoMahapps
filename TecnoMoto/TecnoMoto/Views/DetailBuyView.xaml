@@ -9,35 +9,101 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Compra" Height="800" Width="800">
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <local1:HomeUserControl></local1:HomeUserControl>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1" Background="LightSlateGray">
+            <Grid Grid.Row="0" Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Proveedores" Grid.Column="0" Foreground="White" Margin="42,14,80,112"/>
-                <Controls:SplitButton 
+                <!--<Label Content="Nombre producto" Grid.Column="0" />-->
+                <Label 
                     Grid.Column="0"
-                    x:Name="splitBtnTProd"
-                    HorizontalContentAlignment="Left"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Width="142"
-                    SelectedIndex="0"
-                    ItemsSource="{Binding Path=listTypeProduct, Mode=TwoWay}"
-                    VerticalAlignment="Center" Margin="42,85,80,43" Height="26" >
+                    Grid.Row="0" 
+                    Content="Codigo Producto"
+                    Margin="0,0,8,8"
+                    Width="Auto"/>
+                <TextBox
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
+                    Controls:TextBoxHelper.ClearTextButton="True" 
+                    Controls:TextBoxHelper.Watermark="Codigo producto" 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Center" 
+                    BorderBrush="Black" 
+                    Width="Auto" 
+                    Margin="0,0,8,8"/>
+
+                <Label 
+                    Grid.Column="1"
+                    Grid.Row="0" 
+                    Content="Nombre Producto"
+                    Margin="0,0,8,8"
+                    Width="Auto"/>
+                <TextBox
+                    Grid.Column="1" 
+                    Grid.Row="1" 
+                    Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
+                    Controls:TextBoxHelper.ClearTextButton="True" 
+                    Controls:TextBoxHelper.Watermark="Nombre producto" 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Center" 
+                    BorderBrush="Black" 
+                    Width="Auto" 
+                    Margin="0,0,8,8"/>
+
+                <Label 
+                    Grid.Column="2"
+                    Grid.Row="0" 
+                    Content="Cantidad Producto"
+                    Margin="0,0,8,8"
+                    Width="Auto"/>
+                <TextBox
+                    Grid.Column="2" 
+                    Grid.Row="1" 
+                    Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
+                    Controls:TextBoxHelper.ClearTextButton="True" 
+                    Controls:TextBoxHelper.Watermark="Cantidad producto" 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Center" 
+                    BorderBrush="Black" 
+                    Width="Auto" 
+                    Margin="0,0,8,8"/>
+
+
+                <!--<Label Content="tipo de producto" Margin="23,23,323,74" />
+                <Controls:SplitButton 
+                x:Name="splitBtnTProd"
+                HorizontalContentAlignment="Left"
+                HorizontalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Width="182"
+                SelectedIndex="0"
+                ItemsSource="{Binding Path=listTypeProd, Mode=TwoWay}"
+                VerticalAlignment="Center" Margin="23,74,323,28" Height="26" >
                     <Controls:SplitButton.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -45,14 +111,233 @@
                             </Grid>
                         </DataTemplate>
                     </Controls:SplitButton.ItemTemplate>
+                </Controls:SplitButton>-->
+
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <DataGrid 
+                    Name="listModel1" 
+                    ItemsSource= "{Binding Path=listProduct}"  
+                    AutoGenerateColumns="False"
+                    Style="{StaticResource MetroDataGrid}"
+                    Width="Auto">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                                EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                                Header="Seleccion"
+                                                Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"/>
+                        <DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_PRODUCT}"
+                                        Binding="{Binding ID_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Producto" 
+                                            Binding="{Binding NAME_PRODUCT}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cantidad" 
+                                            Binding="{Binding CANT_PRODUCT}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Valor Compra" 
+                                            Binding="{Binding VALUE_PRODUCT_BUY, StringFormat= c}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Min." 
+                                            Binding="{Binding MIN}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"
+                                            Width="Auto"/>
+                        <DataGridTextColumn Header="Max." 
+                                            Binding="{Binding MAX}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Activo" 
+                                            Binding="{Binding ACTIVE}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="2" Background="LightSlateGray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                    Content="Proveedores" 
+                    Grid.Column="0" 
+                    Foreground="White" 
+                    Margin="0,0,8,8"
+                    Width="Auto"/>
+                <Controls:SplitButton 
+                    Grid.Column="0"
+                    x:Name="splitBtnProv"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Width="Auto"
+                    SelectedIndex="0"
+                    ItemsSource="{Binding Path=listUserProv, Mode=TwoWay}" 
+                    Margin="0,0,8,8"
+                    SelectionChanged="splitBtnProv_SelectionChanged" Grid.Row="1" >
+                    <Controls:SplitButton.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding USERNAME}" VerticalAlignment="Top"/>
+                            </Grid>
+                        </DataTemplate>
+                    </Controls:SplitButton.ItemTemplate>
                 </Controls:SplitButton>
-                <Label Content="Documento" Grid.Column="1" Foreground="White" Margin="57,14,65,112"/>
-                <Label Content="Nombre" Grid.Column="1" Foreground="White" Margin="57,83,65,43"/>
+                <TextBlock Text="{Binding userModel.DOCUMENT, StringFormat=Documento: {0}, UpdateSourceTrigger=PropertyChanged}" 
+                       Grid.Column="1" 
+                       Foreground="White" 
+                       Margin="0,0,8,8"
+                       Grid.Row="0"
+                       Width="Auto"/>
+                <TextBlock Text="{Binding userModel.USERNAME, StringFormat=Nombre: {0}, UpdateSourceTrigger=PropertyChanged}" 
+                       Grid.Column="1" 
+                       Foreground="White" 
+                       Margin="0,0,8,8" 
+                       Grid.Row="1"
+                       Width="Auto"/>
+                <!--<Label 
+                    Grid.Column="2"
+                    Grid.Row="0" 
+                    Content="Cantidad Producto"
+                    Margin="0,0,8,8"
+                    Width="Auto"/>-->
+                <!--<Label Content="Nombre" Grid.Column="1" Foreground="White" Margin="57,83,65,43"/>-->
+
+
+
 
             </Grid>
         </Grid>
 
+        <Border Grid.Column="1" BorderBrush="Black"  BorderThickness="2 0 0 0">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
+                <!--<Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                
+                <TextBlock Text="{Binding userModel.DOCUMENT, StringFormat=Documento: {0}, UpdateSourceTrigger=PropertyChanged}" 
+                       Grid.Column="1" 
+                       Foreground="White" 
+                       Margin="0,0,8,8"
+                       Grid.Row="0"
+                       Width="Auto"/>
+            </Grid>-->
+
+                <Grid Grid.Row="1">
+                    <DataGrid 
+                    ItemsSource= "{Binding Path=listProduct}"  
+                    AutoGenerateColumns="False"
+                    Style="{StaticResource MetroDataGrid}"
+                    Width="Auto">
+                        <DataGrid.Columns>
+                            <!--<DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                                EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                                Header="Seleccion"
+                                                Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}"/>-->
+                            <!--<DataGridTextColumn Header="#Columna" 
+                                        TextSearch.Text="{Binding ID_PRODUCT}"
+                                        Binding="{Binding ID_PRODUCT}" 
+                                        Selector.IsSelected="False"
+                                        IsReadOnly="True"/>-->
+                            <DataGridTextColumn Header="Producto" 
+                                            Binding="{Binding NAME_PRODUCT}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Cantidad" 
+                                            Binding="{Binding CANT_PRODUCT}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Valor Compra" 
+                                            Binding="{Binding VALUE_PRODUCT_BUY, StringFormat= c}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                            <!--<DataGridTextColumn Header="Min." 
+                                            Binding="{Binding MIN}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"
+                                            Width="Auto"/>-->
+                            <!--<DataGridTextColumn Header="Max." 
+                                            Binding="{Binding MAX}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Activo" 
+                                            Binding="{Binding ACTIVE}" 
+                                            Selector.IsSelected="False"
+                                            IsReadOnly="True"/>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <Border Grid.Row="2" BorderBrush="Black"  BorderThickness="0 2 0 0">
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Label 
+                        Content="Cant. Productos:" 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0,0,8,8"/>
+
+                        <Label 
+                        Content="Cant. Productos:" 
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="0,0,8,8"/>
+
+                        <Label 
+                        Content="Total Productos:" 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0,0,8,8"/>
+
+                        <Label 
+                        Content="Cant. Productos:" 
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="0,0,8,8"/>
+
+                        <Button x:Name="btnGuardar" 
+                            Content="Finalizar" 
+                            Margin="4"  
+                            Width="Auto" 
+                            BorderBrush="Black" 
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
 
     </Grid>
 </Controls:MetroWindow>

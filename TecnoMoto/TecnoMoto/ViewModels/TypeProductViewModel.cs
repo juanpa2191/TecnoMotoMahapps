@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TecnoMoto.Common;
 using TecnoMoto.Models;
 using TecnoMoto.Services;
 
@@ -43,9 +44,7 @@ namespace TecnoMoto.ViewModels
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
-                {
                     return new ObservableCollection<type_product>(db.type_product.ToList());
-                }
             }
             catch (Exception)
             {

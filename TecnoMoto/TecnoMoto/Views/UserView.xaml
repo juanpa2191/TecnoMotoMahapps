@@ -19,7 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="Nombre: " 
                    Grid.Column="0" 
-                   Margin="24,31,198,126"/>
+                   Margin="24,31,198,211"/>
             <TextBox x:Name="txtName" 
                      Text="{Binding userModel.USERNAME,Mode=TwoWay}" 
                      HorizontalAlignment="Center" 
@@ -44,7 +44,7 @@
                      Grid.Column="0"/>
             <Label Content="Usuario:" 
                    Grid.Column="0" 
-                   Margin="24,81,198,76"/>
+                   Margin="24,81,198,163"/>
             <TextBox x:Name="txtUser" 
                      Text="{Binding userModel.USERS,Mode=TwoWay}" 
                      HorizontalAlignment="Center" 
@@ -57,24 +57,37 @@
                      BorderBrush="Black" 
                      Height="13"
                      Grid.Column="0"/>
-
             <Label Content="Contraseña:" 
-                   Grid.Column="0" 
-                   Margin="24,126,198,31"/>
+                   Grid.Column="1" 
+                   Margin="10,134,204,110"/>
             <PasswordBox x:Name="txtPass" 
                      HorizontalAlignment="Center" 
                      Controls:TextBoxHelper.ClearTextButton="True" 
                      Controls:TextBoxHelper.Watermark="Contraseña" 
                      VerticalAlignment="Top" 
                      Width="131" 
-                     Margin="130,126,35,0" 
+                     Margin="113,134,52,0" 
                      BorderBrush="Black" 
                      Height="13"
-                     Grid.Column="0"/>
-
+                     Grid.Column="1"/>
+            <Label Content="Documento:" 
+                Grid.Column="0" 
+                Margin="24,134,198,110"/>
+            <TextBox x:Name="txtDocument" 
+                Text="{Binding userModel.DOCUMENT, Mode=TwoWay}" 
+                HorizontalAlignment="Center" 
+                Controls:TextBoxHelper.ClearTextButton="True" 
+                Controls:TextBoxHelper.Watermark="Documento" 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Width="131" 
+                Margin="130,134,35,0" 
+                BorderBrush="Black" 
+                Height="13"
+                Grid.Column="0"/>
             <Label Content="Telefono: " 
                    Grid.Column="1" 
-                   Margin="10,33,204,123"/>
+                   Margin="10,33,204,211"/>
             <TextBox x:Name="txtNsame" 
                      Text="{Binding userModel.PHONE,Mode=TwoWay}" 
                      HorizontalAlignment="Center" 
@@ -89,7 +102,7 @@
                      Grid.Column="1"/>
             <Label Content="Tipo Usuario" 
                    Grid.Column="1" 
-                   Margin="10,81,204,74"/>
+                   Margin="10,81,204,162"/>
             <Controls:SplitButton 
                 Grid.Column="1"
                 x:Name="splitBtnTUser"
@@ -100,7 +113,7 @@
                 SelectedIndex="0"
                 ItemsSource="{Binding Path=listTypeUser, Mode=TwoWay}"
                 VerticalAlignment="Center" 
-                Margin="113,80,52,73"  Height="27" >
+                Margin="113,81,52,162"  Height="27" >
                 <Controls:SplitButton.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -109,19 +122,29 @@
                     </DataTemplate>
                 </Controls:SplitButton.ItemTemplate>
             </Controls:SplitButton>
+            <Controls:ToggleSwitch 
+                Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" 
+                x:Name="dishesSelection" 
+                Header="Activo"                               
+                ContentDirection="LeftToRight" 
+                OnLabel="Si" 
+                OffLabel="No"
+                Margin="27,174,35,44"
+                IsChecked="{Binding userModel.ACTIVE, Mode=TwoWay}"/>
             <Label Content="Contraseña:" 
                    Grid.Column="1" 
-                   Margin="10,126,204,31"/>
+                   Margin="10,190,204,54"/>
             <PasswordBox x:Name="txtPass1" 
                      HorizontalAlignment="Center" 
                      Controls:TextBoxHelper.ClearTextButton="True" 
                      Controls:TextBoxHelper.Watermark="Contraseña" 
                      VerticalAlignment="Top" 
                      Width="131" 
-                     Margin="113,126,52,0" 
+                     Margin="113,190,52,0" 
                      BorderBrush="Black" 
                      Height="13"
                      Grid.Column="1"/>
+
         </Grid>
 
         <Button x:Name="btnSave" 

@@ -25,7 +25,7 @@
         <Grid Grid.Row="0">
             <Label Content="Compra" Margin="57,30,432,10" FontSize="25" FontWeight="Bold"></Label>
 
-            <Button ToolTip="Agregar tipo de producto" x:Name="button2" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="40" Margin="180,30,0,0" VerticalAlignment="Top" Width="40" >
+            <Button ToolTip="Nuevo Compra" x:Name="btnNewBuy" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Height="40" Margin="180,30,0,0" VerticalAlignment="Top" Width="40" Click="btnNewBuy_Click" >
                 <Rectangle Width="15" Height="15" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                     <Rectangle.OpacityMask>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />

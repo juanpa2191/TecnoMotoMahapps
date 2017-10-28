@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TecnoMoto.Common;
 using TecnoMoto.Models;
 using TecnoMoto.Services;
 
@@ -27,7 +28,6 @@ namespace TecnoMoto.ViewModels
             }
         }
 
-        TypeProductViewModel tpVM = new TypeProductViewModel();
         public ObservableCollection<type_product> listTypeProduct { get; set; }
 
         public ObservableCollection<product> listProduct { get; set; }
@@ -38,9 +38,32 @@ namespace TecnoMoto.ViewModels
         public ProductViewModel()
         {
             productModel = new product();
-            listTypeProduct = tpVM.ListTypeProd();
+            listTypeProduct = ListTypeProd();
             listProduct = FindProduct();
 
+        }
+
+        public ObservableCollection<type_product> ListTypeProd()
+        {
+            try
+            {
+                using (Db_TecnoMotos db = new Db_TecnoMotos())
+                {
+                    List<type_product> listType = new List<type_product>();
+                    listType.Add(new type_product
+                    {
+                        ID_TYPE_PRODUCT = 0,
+                        NAME_TYPE_PRODUCT = Constantes.SELECCIONE
+                    });
+                    listType.AddRange(db.type_product.ToList());
+
+                    return new ObservableCollection<type_product>(listType);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool SaveTypeProdAsync(string name)
@@ -58,8 +81,7 @@ namespace TecnoMoto.ViewModels
 
                     db.type_product.Add(tp);
                     db.SaveChanges();
-                    listTypeProduct = tpVM.ListTypeProd();
-                    //listTypeProduct.Add(tpVM);
+                    listTypeProduct = ListTypeProd();
                     return true;
                 }
 

@@ -102,7 +102,13 @@
             </Controls:Tile>
             <Controls:Tile Title="Finance" Style="{StaticResource LargeTileStyle}" Background="Green" />
             <Controls:Tile Title="People" Style="{StaticResource LargeTileStyle}" Background="#D2691E" />
-            <Controls:Tile Title="Weather" Style="{StaticResource LargeTileStyle}" Background="#1E90FF" />
+            <Controls:Tile Title="Tipo Vehiculo" Style="{StaticResource LargeTileStyle}" Background="#1E90FF" >
+                <Rectangle Margin="0, 0, 0, 0" Width="70" Height="66">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_transit_congestion}"  />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Controls:Tile>
             <Controls:Tile Title="Tipo producto" Style="{StaticResource SmallTileStyle}" Background="#1E90FF" Click="Tile_Click_Type_Prod" >
                 <Rectangle Margin="0, 0, 0, 0" Width="70" Height="66">
                     <Rectangle.Fill>

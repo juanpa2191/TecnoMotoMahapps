@@ -35,6 +35,8 @@ namespace TecnoMoto.Models
         [StringLength(50)]
         public string DOCUMENT { get; set; }
 
+        public bool ACTIVE { get; set; }
+
         public long ID_TYPE_USER { get; set; }
 
         public virtual type_user type_user { get; set; }

@@ -51,7 +51,7 @@ namespace TecnoMoto.ViewModels
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
-                    return new ObservableCollection<buy>(db.buy.Include("users.type_user").Where(x => x.ID_USER == Constantes.TipoUsuario.PROVEEDOR).ToList());
+                    return new ObservableCollection<buy>(db.buy.Include("users.type_user").ToList());
             }
             catch (Exception)
             {

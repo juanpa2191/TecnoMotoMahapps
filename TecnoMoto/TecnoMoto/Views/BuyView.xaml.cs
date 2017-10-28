@@ -37,5 +37,12 @@ namespace TecnoMoto.Views
         {
             flyProd.IsOpen = true;
         }
+
+        private void btnNewBuy_Click(object sender, RoutedEventArgs e)
+        {
+            Views.DetailBuyView _detailBuy = new DetailBuyView(0);
+            this.Close();
+            _detailBuy.ShowDialog();
+        }
     }
 }

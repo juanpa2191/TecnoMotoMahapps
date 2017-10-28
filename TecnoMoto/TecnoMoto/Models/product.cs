@@ -13,6 +13,7 @@ namespace TecnoMoto.Models
         public product()
         {
             detail_bill = new HashSet<detail_bill>();
+            detail_buy = new HashSet<detail_buy>();
         }
 
         [Key]
@@ -27,9 +28,15 @@ namespace TecnoMoto.Models
 
         public bool ACTIVE { get; set; }
 
-        public long? ID_TYPE_PRODUCT { get; set; }
+        public long ID_TYPE_PRODUCT { get; set; }
 
-        public long? VALUE_PRODUCT { get; set; }
+        public long VALUE_PRODUCT_BUY { get; set; }
+
+        public long VALUE_PRODUCT_BILL { get; set; }
+
+        public long CANT_PRODUCT { get; set; }
+        public long MIN { get; set; }
+        public long MAX { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<detail_bill> detail_bill { get; set; }
