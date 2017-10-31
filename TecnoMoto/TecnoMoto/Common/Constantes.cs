@@ -16,6 +16,7 @@ namespace TecnoMoto.Common
         public const string DATOS_CORRECTOS = "Tus datos son correctos";
         public const string CONTRASENA_INCORRECTA = "Contraseña Incorrecta";
         public const string SELECCIONE = "-- Seleccione --";
+        public const string FALTA_PRESTADOR = "Por favor ingrese el proveedor para poder hacer la compra";
 
         public class TipoUsuario
         {

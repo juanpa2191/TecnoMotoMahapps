@@ -8,6 +8,8 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
         Title="Compra" Height="600" Width="600">
 
     <Controls:MetroWindow.LeftWindowCommands>
@@ -62,7 +64,7 @@
 
         <Grid Grid.Row="1">
             <DataGrid Name="listBuy" 
-                      ItemsSource="{Binding Path=listUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding Path=listBuy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       CanUserResizeColumns="False" 
                       AutoGenerateColumns="False" 
                       SelectionUnit="FullRow"
@@ -81,10 +83,6 @@
                     <DataGridTextColumn Header="Nombre" 
                                         Binding="{Binding users.USERNAME}" 
                                         IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Fecha" 
-                                        IsReadOnly="True"
-                                        CellStyle="{StaticResource MetroDataGridCell}"
-                                        Binding="{Binding users.DATE_REGISTER}" />
                     <DataGridTextColumn Header="Telefono" 
                                         IsReadOnly="True"
                                         CellStyle="{StaticResource MetroDataGridCell}"
@@ -93,12 +91,37 @@
                                         IsReadOnly="True"
                                         CellStyle="{StaticResource MetroDataGridCell}"
                                         Binding="{Binding users.type_user.TYPE_USER}" />
+                    <DataGridTextColumn Header="Fecha" 
+                                        IsReadOnly="True"
+                                        CellStyle="{StaticResource MetroDataGridCell}"
+                                        Binding="{Binding DATE_REGISTER}" />
+                    <DataGridTemplateColumn Header="Opciones">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    ToolTip="Seguir Compra" 
+                                    x:Name="button1"  
+                                    HorizontalAlignment="Left" 
+                                    Height="Auto" 
+                                    VerticalAlignment="Top" 
+                                    Width="Auto" 
+                                    CommandParameter="{Binding ID_BUY}"
+                                    Click="btnGoDetailBuy_Click">
+                                    <Rectangle Width="15" Height="15" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_redo_point}" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
 
 
-        <Controls:Flyout x:Name="flyProd" Grid.RowSpan="3" Width="300" Foreground="White" Header="Insertar Tipo de producto" Position="Right">
+        <Controls:Flyout x:Name="flyProd" Grid.RowSpan="3" Width="300" Foreground="White" Header="Insertar Tipo de producto" Position="Right" d:IsHidden="True">
             <Controls:Flyout.Background>
                 <SolidColorBrush Color="#FF252424" Opacity="0.8"/>
             </Controls:Flyout.Background>

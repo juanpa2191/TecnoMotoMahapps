@@ -43,7 +43,10 @@ namespace TecnoMoto
                 string us = txtUsuario.Text;
                 string pass = txtPassword.Password;
                 if (string.IsNullOrEmpty(us) && string.IsNullOrEmpty(pass))
+                {
+                    Wait.IsActive = false;
                     await this.ShowMessageAsync(Constantes.ERROR, Constantes.CAMPOS_VACIOS);
+                }
                 else
                 {
                     if (await userVM.isExist(us, pass))

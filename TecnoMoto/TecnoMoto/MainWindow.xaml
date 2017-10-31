@@ -7,6 +7,8 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        GlowBrush="{DynamicResource AccentColorBrush}"
         Title="Login" Height="350" Width="400">
     <Grid>
         <Grid.RowDefinitions>

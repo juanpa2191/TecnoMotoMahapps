@@ -37,52 +37,67 @@ namespace TecnoMoto.Views
 
         private void listModel1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (sender != null)
+            try
             {
-                DataGrid grid = sender as DataGrid;
-                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                if (sender != null)
                 {
-                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
-                    var user = dgr.DataContext as users;
-                    MyContext.userModel = dgr.DataContext as users;
-                    splitBtnTUser.SelectedIndex = ((int)user.type_user.ID_TYPE_USER -1);
-                    txtPass1.Password = user.PASS;
-                    txtPass.Password = user.PASS;
+                    DataGrid grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                        var user = dgr.DataContext as users;
+                        MyContext.userModel = dgr.DataContext as users;
+                        splitBtnTUser.SelectedIndex = ((int)user.type_user.ID_TYPE_USER - 1);
+                        txtPass1.Password = user.PASS;
+                        txtPass.Password = user.PASS;
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (txtPass1.Password == txtPass.Password)
+            try
             {
-                var typeUser = splitBtnTUser.SelectedItem as type_user;
-
-                bool isValid;
-                if (await MyContext.IsValid(MyContext.userModel, typeUser, txtPass.Password, txtPass1.Password))
+                if (txtPass1.Password == txtPass.Password)
                 {
-                    MyContext.userModel.PASS = txtPass.Password;
-                    if (MyContext.userModel.ID_USER != 0)
-                        isValid = await MyContext.UpdateUserAsync(MyContext.userModel, typeUser);
-                    else
-                        isValid = await MyContext.SaveUserAsync(MyContext.userModel, typeUser);
+                    var typeUser = splitBtnTUser.SelectedItem as type_user;
 
-                    if (isValid)
+                    bool isValid;
+                    if (await MyContext.IsValid(MyContext.userModel, typeUser, txtPass.Password, txtPass1.Password))
                     {
-                        txtPass.Clear();
-                        txtPass1.Clear();
-                        await this.ShowMessageAsync(Constantes.EXITO, Constantes.INSERCCION_EXITOSA, MessageDialogStyle.Affirmative);
+                        MyContext.userModel.PASS = txtPass.Password;
+                        if (MyContext.userModel.ID_USER != 0)
+                            isValid = await MyContext.UpdateUserAsync(MyContext.userModel, typeUser);
+                        else
+                            isValid = await MyContext.SaveUserAsync(MyContext.userModel, typeUser);
+
+                        if (isValid)
+                        {
+                            txtPass.Clear();
+                            txtPass1.Clear();
+                            await this.ShowMessageAsync(Constantes.EXITO, Constantes.INSERCCION_EXITOSA, MessageDialogStyle.Affirmative);
+                        }
+                        else
+                            await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
                     }
                     else
                         await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
                 }
                 else
-                    await this.ShowMessageAsync(Constantes.ERROR, Constantes.VERIFICAR_DATOS);
+                    await this.ShowMessageAsync(Constantes.ERROR, Constantes.CONTRASENA_INCORRECTA);
             }
-            else
-                await this.ShowMessageAsync(Constantes.ERROR, Constantes.CONTRASENA_INCORRECTA);
+            catch (Exception)
+            {
 
-
+                throw;
+            }
         }
     }
 }

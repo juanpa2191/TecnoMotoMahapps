@@ -7,6 +7,8 @@
         xmlns:behaviours ="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
         Title="Menu" Height="auto" Width="1138">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>

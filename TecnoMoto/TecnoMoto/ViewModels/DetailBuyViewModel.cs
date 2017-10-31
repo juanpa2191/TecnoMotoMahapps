@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +16,47 @@ namespace TecnoMoto.ViewModels
 
         #region Properties
 
-        //public TypeProductViewModel tpVM = new TypeProductViewModel();
-
-        //public BuyViewModel bVM = new BuyViewModel();
         public ObservableCollection<product> listProduct { get; set; }
 
         public ObservableCollection<users> listUserProv { get; set; }
 
-        public ObservableCollection<type_product> listTypeProd { get; set; }
+        public ObservableCollection<detail_buy> listDetailBuy { get; set; }
 
+        private detail_buy _detailBuy;
+
+        public detail_buy detailBuyModel
+        {
+            get { return _detailBuy; }
+            set
+            {
+                _detailBuy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private long _cant;
+
+        public long cant
+        {
+            get { return _cant; }
+            set
+            {
+                _cant = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private long _Total;
+
+        public long total
+        {
+            get { return _Total; }
+            set
+            {
+                _Total = value;
+                OnPropertyChanged();
+            }
+        }
         private users _User;
 
         public users userModel
@@ -54,11 +87,23 @@ namespace TecnoMoto.ViewModels
 
         public DetailBuyViewModel(long? idBuy)
         {
-            listUserProv = idBuy.Value != 0 ? listProvider(idBuy.Value) : listProvider();
-            userModel = idBuy.Value != 0 ? listUserProv.First() : new users();
+            if (idBuy.Value != 0)
+            {
+                listUserProv = listProvider(idBuy.Value);
+                userModel = listUserProv.First();
+                buyModel = getBuy(idBuy.Value);
+                listDetailBuy = listDetBuy(idBuy.Value);
+                totalValue();
+            }
+            else
+            {
+                listUserProv = listProvider();
+                userModel = new users();
+                buyModel = new buy();
+                listDetailBuy = new ObservableCollection<detail_buy>();
+            }
             listProduct = listProd();
-            listTypeProd = listTProd();
-
+            
         }
 
         #region NewBuy
@@ -85,28 +130,116 @@ namespace TecnoMoto.ViewModels
             }
         }
 
-        public ObservableCollection<type_product> listTProd()
+        public ObservableCollection<detail_buy> listDetBuy(long idBuy)
         {
             try
             {
                 using (Db_TecnoMotos db = new Db_TecnoMotos())
                 {
-                    List<type_product> listTProd = new List<type_product>();
+                    var detail = db.detail_buy
+                        .Include("product")
+                        .Where(x => x.ID_BUY == idBuy).ToList();
 
-                    listTProd.Add(new type_product()
-                    {
-                        ID_TYPE_PRODUCT = 0,
-                        NAME_TYPE_PRODUCT = Constantes.SELECCIONE
-                    });
-                    listTProd.AddRange(db.type_product.ToList());
-                    return new ObservableCollection<type_product>(listTProd);
+                    return new ObservableCollection<detail_buy>(detail);
                 }
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
+
+        public async Task addProduct(long? idBuy, product p, users u, long cant)
+        {
+            using (Db_TecnoMotos db = new Db_TecnoMotos())
+            {
+                using (var tran = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        buyModel = db.buy.Find(idBuy.Value);
+
+                        if (buyModel == null)
+                        {
+                            buyModel = new buy()
+                            {
+                                COMPLETE = false,
+                                DATE_REGISTER = DateTime.Now,
+                                ID_USER = u.ID_USER
+                            };
+
+                            db.buy.Add(buyModel);
+                            await db.SaveChangesAsync();
+                        }
+
+                        var detail = new detail_buy()
+                        {
+                            ID_PRODUCT = p.ID_PRODUCT,
+                            ID_BUY = buyModel.ID_BUY,
+                            CANT = cant,
+                            VALUE = p.VALUE_PRODUCT_BUY
+                        };
+
+                        listDetailBuy.Add(detail);
+                        db.detail_buy.Add(detail);
+
+                        var prod = db.products.Find(p.ID_PRODUCT);
+                        prod.CANT_PRODUCT = p.CANT_PRODUCT + cant;
+                        //p.CANT_PRODUCT = p.CANT_PRODUCT + cant;
+                        db.Entry(prod).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+
+                        tran.Commit();
+                        totalValue();
+
+                    }
+                    catch (Exception)
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+
+                //return await Task.FromResult( new detail_buy());
+            }
+
+        }
+
+        public void totalValue()
+        {
+            try
+            {
+                cant  = 0;
+                total = 0;
+                foreach (var item in listDetailBuy)
+                {
+                    cant += item.CANT.Value;
+                    total += (item.CANT.Value * item.product.VALUE_PRODUCT_BUY);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public buy getBuy(long idBuy)
+        {
+            try
+            {
+                using (Db_TecnoMotos db = new Db_TecnoMotos())
+                    return db.buy.Find(idBuy);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public ObservableCollection<product> listProd()
         {
@@ -144,7 +277,7 @@ namespace TecnoMoto.ViewModels
         #endregion
 
 
-        
+
 
     }
 }
