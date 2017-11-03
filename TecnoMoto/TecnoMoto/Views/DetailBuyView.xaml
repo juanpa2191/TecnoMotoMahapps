@@ -48,6 +48,7 @@
                     Margin="0,0,8,8"
                     Width="Auto"/>
                 <TextBox
+                    Name="txtCodeP"
                     Grid.Column="0" 
                     Grid.Row="1" 
                     Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
@@ -57,7 +58,8 @@
                     VerticalAlignment="Center" 
                     BorderBrush="Black" 
                     Width="Auto" 
-                    Margin="0,0,8,8"/>
+                    Margin="0,0,8,8"
+                    KeyUp="txtCodeP_KeyUp"/>
 
                 <Label 
                     Grid.Column="1"
@@ -66,6 +68,7 @@
                     Margin="0,0,8,8"
                     Width="Auto"/>
                 <TextBox
+                    x:Name="txtNameProd"
                     Grid.Column="1" 
                     Grid.Row="1" 
                     Text="{Binding productModel.NAME_PRODUCT,Mode=TwoWay}" 
@@ -75,7 +78,8 @@
                     VerticalAlignment="Center" 
                     BorderBrush="Black" 
                     Width="Auto" 
-                    Margin="0,0,8,8"/>
+                    Margin="0,0,8,8"
+                    KeyUp="txtNameProd_KeyUp"/>
 
                 <Label 
                     Grid.Column="2"

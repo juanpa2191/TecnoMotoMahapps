@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace TecnoMoto.Views
     {
         #region Properties
         public DetailBuyViewModel MyContext { get; set; }
+        public ObservableCollection<product> listP { get; set; }
+
         #endregion
 
         public DetailBuyView(long? idBuy)
@@ -33,6 +36,9 @@ namespace TecnoMoto.Views
             InitializeComponent();
             MyContext = new DetailBuyViewModel(idBuy);
             this.DataContext = MyContext;
+            txtCodeP.Focusable = true;
+            txtCodeP.Focus();
+            listP = MyContext.listProduct;
         }
 
         private void splitBtnProv_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,11 +79,46 @@ namespace TecnoMoto.Views
                                 c++;
 
                             await MyContext.addProduct(MyContext.buyModel.ID_BUY, pro, u, c);
+                            pCant.Clear();
                         }
                         else
                             await this.ShowMessageAsync(Constantes.ERROR, Constantes.FALTA_PRESTADOR);
                     }
                 }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void txtCodeP_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtCodeP.Text) || !string.IsNullOrEmpty(txtNameProd.Text))
+                {
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void txtNameProd_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtCodeP.Text) || !string.IsNullOrEmpty(txtNameProd.Text))
+                {
+
+                }
+
             }
             catch (Exception)
             {

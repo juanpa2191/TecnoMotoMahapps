@@ -192,6 +192,7 @@ namespace TecnoMoto.ViewModels
 
                         tran.Commit();
                         totalValue();
+                        updateListP(p, cant);
 
                     }
                     catch (Exception)
@@ -217,7 +218,22 @@ namespace TecnoMoto.ViewModels
                     cant += item.CANT.Value;
                     total += (item.CANT.Value * item.product.VALUE_PRODUCT_BUY);
                 }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        public void updateListP(product p, long cant)
+        {
+            try
+            {
+                var pro = listProduct.Where(X => X.ID_PRODUCT == p.ID_PRODUCT).First();
+                listProduct.Remove(pro);
+                pro.CANT_PRODUCT += cant;
+                listProduct.Insert(listProduct.Count, p);
             }
             catch (Exception)
             {

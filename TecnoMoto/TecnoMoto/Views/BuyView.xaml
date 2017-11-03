@@ -107,7 +107,7 @@
                                     Width="Auto" 
                                     CommandParameter="{Binding ID_BUY}"
                                     Click="btnGoDetailBuy_Click">
-                                    <Rectangle Width="15" Height="15" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                    <Rectangle Width="15" Height="15" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_redo_point}" />
                                         </Rectangle.OpacityMask>
